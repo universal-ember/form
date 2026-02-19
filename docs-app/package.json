@@ -123,9 +123,9 @@
     "ember-browser-services": "^5.0.0",
     "ember-changeset": "^4.1.2",
     "ember-changeset-validations": "^4.1.1",
-    "ember-headless-form": "workspace:*",
-    "ember-headless-form-changeset": "workspace:*",
-    "ember-headless-form-yup": "workspace:*",
+    "@universal-ember/form": "workspace:*",
+    "@universal-ember/form-changeset": "workspace:*",
+    "@universal-ember/form-yup": "workspace:*",
     "ember-modifier": "^4.0.0",
     "ember-resources": "^7.0.0",
     "highlight.js": "^11.6.0",
@@ -135,13 +135,13 @@
     "yup": "^1.0.0"
   },
   "dependenciesMeta": {
-    "ember-headless-form": {
+    "@universal-ember/form": {
       "injected": true
     },
-    "ember-headless-form-changeset": {
+    "@universal-ember/form-changeset": {
       "injected": true
     },
-    "ember-headless-form-yup": {
+    "@universal-ember/form-yup": {
       "injected": true
     }
   }

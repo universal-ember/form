@@ -3,8 +3,8 @@
 import { click, fillIn, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from 'ember-headless-form';
-import { validateYup } from 'ember-headless-form-yup';
+import { HeadlessForm } from '@universal-ember/form';
+import { validateYup } from '@universal-ember/form-yup';
 import sinon from 'sinon';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 import { object, string } from 'yup';

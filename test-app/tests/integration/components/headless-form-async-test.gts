@@ -3,10 +3,10 @@
 import { click, render, rerender, waitFor } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from 'ember-headless-form';
+import { HeadlessForm } from '@universal-ember/form';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 
-import type { FieldValidateCallback } from 'ember-headless-form';
+import type { FieldValidateCallback } from '@universal-ember/form';
 
 module('Integration Component HeadlessForm > Async state', function (hooks) {
   setupRenderingTest(hooks);

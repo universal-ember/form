@@ -14,7 +14,7 @@ import {
 import { module, test } from 'qunit';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 
-import { HeadlessForm } from 'ember-headless-form';
+import { HeadlessForm } from '@universal-ember/form';
 import sinon from 'sinon';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 

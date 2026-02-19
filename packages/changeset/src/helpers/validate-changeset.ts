@@ -1,6 +1,6 @@
 import { isChangeset } from 'validated-changeset';
 
-import type { ErrorRecord, FormValidateCallback } from 'ember-headless-form';
+import type { ErrorRecord, FormValidateCallback } from '@universal-ember/form';
 import type { EmberChangeset } from 'ember-changeset';
 import { assert } from '@ember/debug';
 

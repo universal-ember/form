@@ -10,8 +10,8 @@ module.exports = function (defaults) {
 
     autoImport: {
       watchDependencies: [
-        'ember-headless-form',
-        '@ember-headless-form/changeset',
+        '@universal-ember/form',
+        '@@universal-ember/form/changeset',
       ],
       // See https://github.com/ef4/ember-auto-import/issues/564#issuecomment-1448820349
       earlyBootSet: () => ['@glimmer/tracking'],

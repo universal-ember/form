@@ -370,7 +370,7 @@ export default class HeadlessFormComponent<
     const form = this.formElement;
 
     assert(
-      'Form element expected to be present. If you see this, please report it as a bug to ember-headless-form!',
+      'Form element expected to be present. If you see this, please report it as a bug to @universal-ember/form!',
       form
     );
 
@@ -383,7 +383,7 @@ export default class HeadlessFormComponent<
     for (const el of form.elements) {
       // This is just to make TS happy, as we need to access properties on el that only form elements have, but elements in `form.elements` are just typed as plain `Element`. Should never occur in reality.
       assert(
-        'Unexpected form element. If you see this, please report it as a bug to ember-headless-form!',
+        'Unexpected form element. If you see this, please report it as a bug to @universal-ember/form!',
         el instanceof HTMLInputElement ||
           el instanceof HTMLTextAreaElement ||
           el instanceof HTMLSelectElement ||
@@ -478,7 +478,7 @@ export default class HeadlessFormComponent<
       }
     } else {
       assert(
-        'Validation errors expected to be present. If you see this, please report it as a bug to ember-headless-form!',
+        'Validation errors expected to be present. If you see this, please report it as a bug to @universal-ember/form!',
         // Do *not* use optional chaining due to https://github.com/ember-cli/babel-plugin-debug-macros/issues/89
         this.validationState && this.validationState.isResolved
       );
