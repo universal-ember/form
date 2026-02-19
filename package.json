@@ -1,5 +1,5 @@
 {
-  "name": "@universal-ember/form",
+  "name": "@universal-ember/form-root",
   "version": "0.0.0",
   "private": true,
   "repository": {
@@ -17,7 +17,6 @@
     "build:packages": "pnpm turbo --filter='./packages/*' build",
     "lint": "pnpm turbo lint",
     "lint:fix": "pnpm --filter '*' lint:fix",
-    "release": "changeset publish",
     "start": "pnpm --filter './packages/*' build; concurrently 'npm:_start:*' --names '_start:'",
     "start:docs-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter docs-app... start",
     "start:test-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter test-app... start",
@@ -25,8 +24,6 @@
     "test:docs": "pnpm turbo --filter docs-app test"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.26.0",
     "concurrently": "^9.0.0",
     "prettier": "^2.8.4",
     "release-plan": "^0.17.4",
