@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.0",
-    "prettier": "^2.8.4",
+    "prettier": "^3.8.1",
     "release-plan": "^0.17.4",
     "turbo": "^1.7.4"
   },
@@ -48,12 +48,6 @@
         "ember-cli-htmlbars",
         "@babel/core"
       ]
-    },
-    "overrides": {
-      "@types/eslint": "^9.0.0"
-    },
-    "overrides-notes": {
-      "@types/eslint": "webpack brings in v8, but we use v7"
     }
   }
 }
