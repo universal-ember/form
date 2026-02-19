@@ -7,7 +7,12 @@
     "url": "git@github.com:universal-ember/form.git"
   },
   "license": "MIT",
-  "author": "CrowdStrike UX Team",
+  "contributors": [
+    {
+      "name": "simonihmig",
+      "url": "https://github.com/simonihmig"
+    }
+  ],
   "scripts": {
     "_start:docs": "pnpm --filter docs-app start",
     "_start:packages": "pnpm --stream -parallel --filter './packages/*' start --no-watch.clearScreen",
@@ -29,9 +34,9 @@
     "release-plan": "^0.17.4",
     "turbo": "^1.7.4"
   },
-  "packageManager": "pnpm@10.10.0",
-  "volta": {
-    "node": "22.15.0"
+  "packageManager": "pnpm@10.30.0",
+  "engines": {
+    "node": "^24.0.0"
   },
   "pnpm": {
     "peerDependencyRules": {
