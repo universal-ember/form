@@ -2,7 +2,7 @@ import type {
   ErrorRecord,
   FormKey,
   FormValidateCallback,
-} from 'ember-headless-form';
+} from '@universal-ember/form';
 import { assert } from '@ember/debug';
 
 import type { ObjectSchema, ValidationError } from 'yup';
@@ -24,7 +24,7 @@ export default function validateChangeset<DATA extends object>(
 
       for (const { path, type, value, message } of validationError.inner) {
         assert(
-          'Received undefined path for yup validation error. If you see this, please report it as a bug to ember-headless-form!',
+          'Received undefined path for yup validation error. If you see this, please report it as a bug to @universal-ember/form!',
           path !== undefined
         );
         const key = path as FormKey<DATA>; // yup maybe could have stricter types here, as path will always refer to a key of its schema

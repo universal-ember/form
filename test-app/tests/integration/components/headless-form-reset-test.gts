@@ -4,7 +4,7 @@ import { on } from '@ember/modifier';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from 'ember-headless-form';
+import { HeadlessForm } from '@universal-ember/form';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 
 interface TestFormData {

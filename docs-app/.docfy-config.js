@@ -6,7 +6,7 @@ const monorepoRoot = path.resolve(__dirname, '..');
 
 module.exports = {
   repository: {
-    url: 'https://github.com/CrowdStrike/ember-headless-form',
+    url: 'https://github.com/CrowdStrike/@universal-ember/form',
     editBranch: 'main',
   },
   sources: [

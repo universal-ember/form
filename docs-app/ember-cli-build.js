@@ -7,7 +7,7 @@ const isProduction = () => EmberApp.env() === 'production';
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     autoImport: {
-      watchDependencies: ['ember-headless-form'],
+      watchDependencies: ['@universal-ember/form'],
     },
     'ember-cli-babel': {
       enableTypeScriptTransform: true,

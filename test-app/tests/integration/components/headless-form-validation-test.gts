@@ -4,7 +4,7 @@ import { tracked } from '@glimmer/tracking';
 import { blur, click, fillIn, render, rerender } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from 'ember-headless-form';
+import { HeadlessForm } from '@universal-ember/form';
 import sinon from 'sinon';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 
@@ -16,7 +16,7 @@ import type {
   FieldValidateCallback,
   FormValidateCallback,
   ValidationError,
-} from 'ember-headless-form';
+} from '@universal-ember/form';
 
 module('Integration Component HeadlessForm > Validation', function (hooks) {
   setupRenderingTest(hooks);
