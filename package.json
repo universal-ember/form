@@ -1,53 +1,54 @@
 {
-  "name": "@universal-ember/form",
+  "name": "@universal-ember/form-root",
   "version": "0.0.0",
   "private": true,
-  "repository": "https://github.com/CrowdStrike/@universal-ember/form.git",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:universal-ember/form.git"
+  },
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "scripts": {
-    "release": "changeset publish",
+    "_start:docs": "pnpm --filter docs-app start",
+    "_start:packages": "pnpm --stream -parallel --filter './packages/*' start --no-watch.clearScreen",
+    "_start:tests": "pnpm --filter test-app start",
+    "build": "pnpm turbo build",
     "build:docs": "pnpm turbo build --filter docs-app",
+    "build:packages": "pnpm turbo --filter='./packages/*' build",
+    "lint": "pnpm turbo lint",
+    "lint:fix": "pnpm --filter '*' lint:fix",
     "start": "pnpm --filter './packages/*' build; concurrently 'npm:_start:*' --names '_start:'",
     "start:docs-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter docs-app... start",
     "start:test-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter test-app... start",
-    "build": "pnpm turbo build",
-    "build:packages": "pnpm turbo --filter='./packages/*' build",
     "test": "pnpm turbo --filter test-app test",
-    "test:docs": "pnpm turbo --filter docs-app test",
-    "lint": "pnpm turbo lint",
-    "lint:fix": "pnpm --filter '*' lint:fix",
-    "_start:docs": "pnpm --filter docs-app start",
-    "_start:tests": "pnpm --filter test-app start",
-    "_start:packages": "pnpm --stream -parallel --filter './packages/*' start --no-watch.clearScreen"
+    "test:docs": "pnpm turbo --filter docs-app test"
   },
   "devDependencies": {
-    "@changesets/changelog-github": "^0.5.0",
-    "@changesets/cli": "^2.26.0",
     "concurrently": "^9.0.0",
     "prettier": "^2.8.4",
+    "release-plan": "^0.17.4",
     "turbo": "^1.7.4"
   },
+  "packageManager": "pnpm@10.10.0",
+  "volta": {
+    "node": "22.15.0"
+  },
   "pnpm": {
+    "peerDependencyRules": {
+      "ignore-notes": {
+        "@babel/core": "See https://github.com/embroider-build/addon-blueprint/pull/77",
+        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?"
+      },
+      "ignoreMissing": [
+        "ember-cli-htmlbars",
+        "@babel/core"
+      ]
+    },
     "overrides": {
       "@types/eslint": "^9.0.0"
     },
     "overrides-notes": {
       "@types/eslint": "webpack brings in v8, but we use v7"
-    },
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "ember-cli-htmlbars",
-        "@babel/core"
-      ],
-      "ignore-notes": {
-        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?",
-        "@babel/core": "See https://github.com/embroider-build/addon-blueprint/pull/77"
-      }
     }
-  },
-  "packageManager": "pnpm@10.10.0",
-  "volta": {
-    "node": "22.15.0"
   }
 }
