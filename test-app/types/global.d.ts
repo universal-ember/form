@@ -1,6 +1,3 @@
-import '@glint/environment-ember-loose';
-import '@glint/environment-ember-template-imports';
-
 import type { HelperLike } from '@glint/template';
 import type HeadlessFormRegistry from '@universal-ember/form/template-registry';
 import type HeadlessFormYupRegistry from '@universal-ember/form-yup/template-registry';
@@ -13,7 +10,7 @@ import type HeadlessFormYupRegistry from '@universal-ember/form-yup/template-reg
 //   export default tmpl;
 // }
 
-declare module '@glint/environment-ember-loose/registry' {
+declare module '@glint/template/registry' {
   export default interface Registry
     extends HeadlessFormRegistry,
       HeadlessFormYupRegistry {

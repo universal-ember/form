@@ -15,11 +15,9 @@ This addon is written in TypeScript, and strives to give TypeScript users a firs
 All the components, which are `<HeadlessForm>` as well as those [yielded from it](./usage), have strict Glint types. In case you are already using _strict mode templates_ via [ember-template-imports](https://github.com/ember-template-imports/ember-template-imports), you only need to import the component and you are ready to go. For the more likely case of using classic `.hbs` templates, Glint requires a template registry to be set up, that declares a mapping of component _names_ to their types. This addon follows the [recommendations for Glint-enabled addons](https://typed-ember.gitbook.io/glint/using-glint/ember/using-addons#using-glint-enabled-addons), so add the addon's provided registry to your app's own registry as follows:
 
 ```ts
-import '@glint/environment-ember-loose';
-
 import type HeadlessFormRegistry from 'ember-headless-form/template-registry';
 
-declare module '@glint/environment-ember-loose/registry' {
+declare module '@glint/template/registry' {
   export default interface Registry extends HeadlessFormRegistry {
     // your app's own entries here...
   }

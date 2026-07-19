@@ -1,6 +1,7 @@
 {
-  "extends": "@tsconfig/ember/tsconfig.json",
+  "extends": "@ember/app-tsconfig",
   "compilerOptions": {
+    "types": ["ember-source/types", "@glint/ember-tsc/types"],
     // The combination of `baseUrl` with `paths` allows Ember's classic package
     // layout, which is not resolvable with the Node resolution algorithm, to
     // work with TypeScript.
@@ -11,8 +12,5 @@
       "*": ["types/*"]
     }
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"],
-  "glint": {
-    "environment": ["ember-loose", "ember-template-imports"]
-  }
+  "include": ["app/**/*", "tests/**/*", "types/**/*"]
 }

@@ -37,17 +37,5 @@
   "packageManager": "pnpm@10.30.0",
   "engines": {
     "node": "^24.0.0"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignore-notes": {
-        "@babel/core": "See https://github.com/embroider-build/addon-blueprint/pull/77",
-        "ember-cli-htmlbars": "required by ember-tracked-storage-polyfill and tracked-built-ins: solution convert to babel plugin?"
-      },
-      "ignoreMissing": [
-        "ember-cli-htmlbars",
-        "@babel/core"
-      ]
-    }
   }
 }
