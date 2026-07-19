@@ -87,13 +87,13 @@ export interface HeadlessFormControlInputComponentSignature {
 export default class HeadlessFormControlInputComponent extends Component<HeadlessFormControlInputComponentSignature> {
   constructor(
     owner: unknown,
-    args: HeadlessFormControlInputComponentSignature['Args']
+    args: HeadlessFormControlInputComponentSignature['Args'],
   ) {
     assert(
       `input component does not support @type="${args.type}" as there is a dedicated component for this. Please use the \`field.${args.type}\` instead!`,
       args.type === undefined ||
         // TS would guard us against using an unsupported `InputType`, but for JS consumers we add a dev-only runtime check here
-        !['checkbox', 'radio'].includes(args.type)
+        !['checkbox', 'radio'].includes(args.type),
     );
 
     super(owner, args);
@@ -107,7 +107,7 @@ export default class HeadlessFormControlInputComponent extends Component<Headles
   handleInput(e: Event | InputEvent): void {
     assert('Expected HTMLInputElement', e.target instanceof HTMLInputElement);
     this.args.setValue(
-      this.type === 'number' ? parseFloat(e.target.value) : e.target.value
+      this.type === 'number' ? parseFloat(e.target.value) : e.target.value,
     );
   }
   <template>

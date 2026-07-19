@@ -22,7 +22,6 @@ export interface HeadlessFormErrorsComponentSignature<VALUE> {
   };
 }
 
- 
 export default class HeadlessFormErrorsComponent<VALUE> extends Component<
   HeadlessFormErrorsComponentSignature<VALUE>
 > {

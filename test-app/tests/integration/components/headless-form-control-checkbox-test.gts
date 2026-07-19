@@ -1,5 +1,3 @@
- 
-
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -13,13 +11,15 @@ module('Integration Component HeadlessForm > Checkbox', function (hooks) {
   test('field yields checkbox component', async function (assert) {
     const data: { checked?: boolean } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="checked" as |field|>
-          <field.Checkbox class="my-input" data-test-checkbox />
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="checked" as |field|>
+            <field.Checkbox class="my-input" data-test-checkbox />
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('input')
@@ -30,20 +30,22 @@ module('Integration Component HeadlessForm > Checkbox', function (hooks) {
       .hasAttribute(
         'data-test-checkbox',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('checked property is mapped correctly to @data', async function (assert) {
     const data = { checked: true };
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="checked" as |field|>
-          <field.Checkbox />
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="checked" as |field|>
+            <field.Checkbox />
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('input[type="checkbox"]').isChecked();
   });

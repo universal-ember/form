@@ -49,7 +49,7 @@ export interface HeadlessFormControlSelectComponentSignature {
           typeof HeadlessFormControlSelectOptionComponent,
           'selected'
         >;
-      }
+      },
     ];
   };
 }

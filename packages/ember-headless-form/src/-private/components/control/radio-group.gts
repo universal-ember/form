@@ -52,7 +52,7 @@ export interface HeadlessFormControlRadioGroupComponentSignature {
           typeof HeadlessFormControlRadioGroupLabelComponent,
           'id'
         >;
-      }
+      },
     ];
   };
 }

@@ -12,8 +12,7 @@ import type HeadlessFormYupRegistry from '@universal-ember/form-yup/template-reg
 
 declare module '@glint/template/registry' {
   export default interface Registry
-    extends HeadlessFormRegistry,
-      HeadlessFormYupRegistry {
+    extends HeadlessFormRegistry, HeadlessFormYupRegistry {
     'page-title': HelperLike<{
       Args: { Positional: [title: string] };
       Return: void;

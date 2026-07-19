@@ -1,4 +1,5 @@
 import { getOwner } from '@ember/application';
+import { assert } from '@ember/debug';
 import Route from '@ember/routing/route';
 import { service } from '@ember/service';
 
@@ -13,6 +14,10 @@ export default class Application extends Route {
   }
 
   afterModel() {
-    void setupHLJS(getOwner(this));
+    const owner = getOwner(this);
+
+    assert('Expected the application route to have an owner', owner);
+
+    void setupHLJS(owner);
   }
 }

@@ -1,5 +1,3 @@
- 
-
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -21,14 +19,16 @@ module('Integration Component HeadlessForm > Glint', function (hooks) {
     // Note that we have only firstName here in the type that is passed to @data, no lastName!
     const data = { firstName: 'Simon' };
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        {{! this is valid }}
-        <form.Field @name="firstName" />
-        {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
-        <form.Field @name="lastName" />
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          {{! this is valid }}
+          <form.Field @name="firstName" />
+          {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
+          <form.Field @name="lastName" />
+        </HeadlessForm>
+      </template>,
+    );
   });
 
   test('@name argument only expects keys of @data w/ partial data', async function (assert) {
@@ -36,14 +36,16 @@ module('Integration Component HeadlessForm > Glint', function (hooks) {
 
     const data: { firstName?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        {{! this is valid }}
-        <form.Field @name="firstName" />
-        {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
-        <form.Field @name="lastName" />
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          {{! this is valid }}
+          <form.Field @name="firstName" />
+          {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
+          <form.Field @name="lastName" />
+        </HeadlessForm>
+      </template>,
+    );
   });
 
   test('@name argument w/ an untyped @data errors', async function (assert) {
@@ -51,12 +53,14 @@ module('Integration Component HeadlessForm > Glint', function (hooks) {
 
     const data = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
-        <form.Field @name="firstName" />
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          {{! @glint-expect-error this is expected to be a glint error, as "lastName" does not exist on the type of @data! }}
+          <form.Field @name="firstName" />
+        </HeadlessForm>
+      </template>,
+    );
   });
 
   test('@name argument can only be used for string-types keys', async function (assert) {
@@ -64,12 +68,14 @@ module('Integration Component HeadlessForm > Glint', function (hooks) {
 
     const data: { foo?: string; 0?: number } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="foo" />
-        {{! @glint-expect-error this is expected to be a glint error, as 0 is a valid key of data, but we also require it to be a string! }}
-        <form.Field @name={{0}} />
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="foo" />
+          {{! @glint-expect-error this is expected to be a glint error, as 0 is a valid key of data, but we also require it to be a string! }}
+          <form.Field @name={{0}} />
+        </HeadlessForm>
+      </template>,
+    );
   });
 });

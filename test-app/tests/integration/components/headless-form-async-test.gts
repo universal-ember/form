@@ -1,5 +1,3 @@
- 
-
 import { click, render, rerender, waitFor } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -19,7 +17,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
 
   const validateFieldCallbackSync: FieldValidateCallback<TestFormData> = (
     value,
-    field
+    field,
   ) => {
     const errors = [];
 
@@ -65,32 +63,36 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
     test('validation state is yielded - valid', async function (assert) {
       const data: TestFormData = { firstName: 'Tony', lastName: 'Ward' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field
-            @name="firstName"
-            @validate={{validateFieldCallbackAsync}}
-            as |field|
-          >
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          {{#if form.validationState}}
-            <div data-test-validation-state>{{form.validationState.state}}</div>
-            {{#if form.validationState.isResolved}}
-              <div data-test-validation-value>
-                {{stringify form.validationState.value}}
-              </div>
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field
+              @name="firstName"
+              @validate={{validateFieldCallbackAsync}}
+              as |field|
+            >
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            {{#if form.validationState}}
+              <div
+                data-test-validation-state
+              >{{form.validationState.state}}</div>
+              {{#if form.validationState.isResolved}}
+                <div data-test-validation-value>
+                  {{stringify form.validationState.value}}
+                </div>
+              {{/if}}
             {{/if}}
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-validation-state]')
         .doesNotExist(
-          'form.validationState is not present until first validation'
+          'form.validationState is not present until first validation',
         );
 
       const promise = click('[data-test-submit]');
@@ -115,32 +117,36 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
     test('validation state is yielded - invalid', async function (assert) {
       const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field
-            @name="firstName"
-            @validate={{validateFieldCallbackAsync}}
-            as |field|
-          >
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          {{#if form.validationState}}
-            <div data-test-validation-state>{{form.validationState.state}}</div>
-            {{#if form.validationState.isResolved}}
-              <div data-test-validation-value>
-                {{stringify form.validationState.value}}
-              </div>
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field
+              @name="firstName"
+              @validate={{validateFieldCallbackAsync}}
+              as |field|
+            >
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            {{#if form.validationState}}
+              <div
+                data-test-validation-state
+              >{{form.validationState.state}}</div>
+              {{#if form.validationState.isResolved}}
+                <div data-test-validation-value>
+                  {{stringify form.validationState.value}}
+                </div>
+              {{/if}}
             {{/if}}
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-validation-state]')
         .doesNotExist(
-          'form.validationState is not present until first validation'
+          'form.validationState is not present until first validation',
         );
 
       const promise = click('[data-test-submit]');
@@ -161,7 +167,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
         .dom('[data-test-validation-value]')
         .hasText(
           '{"firstName":[{"type":"notFoo","value":"Foo","message":"Foo is an invalid firstName!"}]}',
-          'form.validationState.value has ErrorRecord'
+          'form.validationState.value has ErrorRecord',
         );
     });
   });
@@ -174,28 +180,32 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
           setTimeout(() => resolve('SUCCESS'), 10);
         });
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          {{#if form.submissionState}}
-            <div data-test-submission-state>{{form.submissionState.state}}</div>
-            {{#if form.submissionState.isResolved}}
-              <div data-test-submission-value>
-                {{form.submissionState.value}}
-              </div>
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            {{#if form.submissionState}}
+              <div
+                data-test-submission-state
+              >{{form.submissionState.state}}</div>
+              {{#if form.submissionState.isResolved}}
+                <div data-test-submission-value>
+                  {{form.submissionState.value}}
+                </div>
+              {{/if}}
             {{/if}}
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-submission-state]')
         .doesNotExist(
-          'form.submissionState is not present until first submission'
+          'form.submissionState is not present until first submission',
         );
 
       const promise = click('[data-test-submit]');
@@ -216,7 +226,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
         .dom('[data-test-submission-value]')
         .hasText(
           'SUCCESS',
-          'form.submissionState.value has value returned by @onSubmit action'
+          'form.submissionState.value has value returned by @onSubmit action',
         );
     });
 
@@ -228,28 +238,32 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
           setTimeout(() => reject('ERROR'), 10);
         });
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          {{#if form.submissionState}}
-            <div data-test-submission-state>{{form.submissionState.state}}</div>
-            {{#if form.submissionState.isRejected}}
-              <div data-test-submission-error>
-                {{stringify form.submissionState.error}}
-              </div>
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            {{#if form.submissionState}}
+              <div
+                data-test-submission-state
+              >{{form.submissionState.state}}</div>
+              {{#if form.submissionState.isRejected}}
+                <div data-test-submission-error>
+                  {{stringify form.submissionState.error}}
+                </div>
+              {{/if}}
             {{/if}}
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-submission-state]')
         .doesNotExist(
-          'form.submissionState is not present until first submission'
+          'form.submissionState is not present until first submission',
         );
 
       const promise = click('[data-test-submit]');
@@ -270,7 +284,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
         .dom('[data-test-submission-error]')
         .hasText(
           '"ERROR"',
-          'form.submissionState.error has error returned by @onSubmit action'
+          'form.submissionState.error has error returned by @onSubmit action',
         );
     });
 
@@ -281,25 +295,31 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
           setTimeout(() => resolve('SUCCESS'), 10);
         });
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field
-            @name="firstName"
-            @validate={{validateFieldCallbackAsync}}
-            as |field|
-          >
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          {{#if form.validationState}}
-            <div data-test-validation-state>{{form.validationState.state}}</div>
-          {{/if}}
-          {{#if form.submissionState}}
-            <div data-test-submission-state>{{form.submissionState.state}}</div>
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field
+              @name="firstName"
+              @validate={{validateFieldCallbackAsync}}
+              as |field|
+            >
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            {{#if form.validationState}}
+              <div
+                data-test-validation-state
+              >{{form.validationState.state}}</div>
+            {{/if}}
+            {{#if form.submissionState}}
+              <div
+                data-test-submission-state
+              >{{form.submissionState.state}}</div>
+            {{/if}}
+          </HeadlessForm>
+        </template>,
+      );
 
       const promise = click('[data-test-submit]');
 
@@ -311,7 +331,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
       assert
         .dom('[data-test-submission-state]')
         .doesNotExist(
-          'form.submissionStatenis not present until validation has finished'
+          'form.submissionStatenis not present until validation has finished',
         );
 
       await waitFor('[data-test-submission-state]');

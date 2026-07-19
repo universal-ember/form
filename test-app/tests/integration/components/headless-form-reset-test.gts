@@ -1,5 +1,3 @@
- 
-
 import { on } from '@ember/modifier';
 import { click, fillIn, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
@@ -20,19 +18,21 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('dirty fields are resetted', async function (assert) {
       const data: TestFormData = { firstName: 'Tony', lastName: 'Ward' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <form.Field @name="lastName" as |field|>
-            <field.Label>Last Name</field.Label>
-            <field.Input data-test-last-name />
-          </form.Field>
-          <button type="reset" data-test-reset>Reset</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <form.Field @name="lastName" as |field|>
+              <field.Label>Last Name</field.Label>
+              <field.Input data-test-last-name />
+            </form.Field>
+            <button type="reset" data-test-reset>Reset</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       await fillIn('[data-test-first-name]', 'Nicole');
       await click('[data-test-reset]');
@@ -44,25 +44,27 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('validation errors are cleared', async function (assert) {
       const data: TestFormData = {};
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input required data-test-first-name />
-            <field.Errors data-test-first-name-errors />
-            {{#if field.isInvalid}}
-              <div data-test-invalid />
-            {{/if}}
-          </form.Field>
-          <form.Field @name="lastName" as |field|>
-            <field.Label>Last Name</field.Label>
-            <field.Input data-test-last-name />
-            <field.Errors data-test-last-name-errors />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button type="reset" data-test-reset>Reset</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input required data-test-first-name />
+              <field.Errors data-test-first-name-errors />
+              {{#if field.isInvalid}}
+                <div data-test-invalid />
+              {{/if}}
+            </form.Field>
+            <form.Field @name="lastName" as |field|>
+              <field.Label>Last Name</field.Label>
+              <field.Input data-test-last-name />
+              <field.Errors data-test-last-name-errors />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button type="reset" data-test-reset>Reset</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       await click('[data-test-submit]');
 
@@ -84,24 +86,28 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('validation state is resetted', async function (assert) {
       const data: TestFormData = {};
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input required data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button type="reset" data-test-reset>Reset</button>
-          {{#if form.validationState}}
-            <div data-test-validation-state>{{form.validationState.state}}</div>
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input required data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button type="reset" data-test-reset>Reset</button>
+            {{#if form.validationState}}
+              <div
+                data-test-validation-state
+              >{{form.validationState.state}}</div>
+            {{/if}}
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-validation-state]')
         .doesNotExist(
-          'form.validationState is not present until first validation'
+          'form.validationState is not present until first validation',
         );
 
       await click('[data-test-submit]');
@@ -121,24 +127,28 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
       const data: TestFormData = {};
       const submitHandler = () => 'ok';
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button type="reset" data-test-reset>Reset</button>
-          {{#if form.submissionState}}
-            <div data-test-submission-state>{{form.submissionState.state}}</div>
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button type="reset" data-test-reset>Reset</button>
+            {{#if form.submissionState}}
+              <div
+                data-test-submission-state
+              >{{form.submissionState.state}}</div>
+            {{/if}}
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-submission-state]')
         .doesNotExist(
-          'form.submissionState is not present until first validation'
+          'form.submissionState is not present until first validation',
         );
 
       await click('[data-test-submit]');
@@ -159,23 +169,25 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('dirty fields are resetted', async function (assert) {
       const data: TestFormData = { firstName: 'Tony', lastName: 'Ward' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <form.Field @name="lastName" as |field|>
-            <field.Label>Last Name</field.Label>
-            <field.Input data-test-last-name />
-          </form.Field>
-          <button
-            type="button"
-            {{on "click" form.reset}}
-            data-test-reset
-          >Reset</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <form.Field @name="lastName" as |field|>
+              <field.Label>Last Name</field.Label>
+              <field.Input data-test-last-name />
+            </form.Field>
+            <button
+              type="button"
+              {{on "click" form.reset}}
+              data-test-reset
+            >Reset</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       await fillIn('[data-test-first-name]', 'Nicole');
       await click('[data-test-reset]');
@@ -187,29 +199,31 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('validation errors are cleared', async function (assert) {
       const data: TestFormData = {};
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input required data-test-first-name />
-            <field.Errors data-test-first-name-errors />
-            {{#if field.isInvalid}}
-              <div data-test-invalid />
-            {{/if}}
-          </form.Field>
-          <form.Field @name="lastName" as |field|>
-            <field.Label>Last Name</field.Label>
-            <field.Input data-test-last-name />
-            <field.Errors data-test-last-name-errors />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button
-            type="button"
-            {{on "click" form.reset}}
-            data-test-reset
-          >Reset</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input required data-test-first-name />
+              <field.Errors data-test-first-name-errors />
+              {{#if field.isInvalid}}
+                <div data-test-invalid />
+              {{/if}}
+            </form.Field>
+            <form.Field @name="lastName" as |field|>
+              <field.Label>Last Name</field.Label>
+              <field.Input data-test-last-name />
+              <field.Errors data-test-last-name-errors />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button
+              type="button"
+              {{on "click" form.reset}}
+              data-test-reset
+            >Reset</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       await click('[data-test-submit]');
 
@@ -231,28 +245,32 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
     test('validation state is resetted', async function (assert) {
       const data: TestFormData = {};
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input required data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button
-            type="button"
-            {{on "click" form.reset}}
-            data-test-reset
-          >Reset</button>
-          {{#if form.validationState}}
-            <div data-test-validation-state>{{form.validationState.state}}</div>
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input required data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button
+              type="button"
+              {{on "click" form.reset}}
+              data-test-reset
+            >Reset</button>
+            {{#if form.validationState}}
+              <div
+                data-test-validation-state
+              >{{form.validationState.state}}</div>
+            {{/if}}
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-validation-state]')
         .doesNotExist(
-          'form.validationState is not present until first validation'
+          'form.validationState is not present until first validation',
         );
 
       await click('[data-test-submit]');
@@ -272,28 +290,32 @@ module('Integration Component HeadlessForm > Reset', function (hooks) {
       const data: TestFormData = {};
       const submitHandler = () => 'ok';
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input data-test-first-name />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-          <button
-            type="button"
-            {{on "click" form.reset}}
-            data-test-reset
-          >Reset</button>
-          {{#if form.submissionState}}
-            <div data-test-submission-state>{{form.submissionState.state}}</div>
-          {{/if}}
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input data-test-first-name />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+            <button
+              type="button"
+              {{on "click" form.reset}}
+              data-test-reset
+            >Reset</button>
+            {{#if form.submissionState}}
+              <div
+                data-test-submission-state
+              >{{form.submissionState.state}}</div>
+            {{/if}}
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-submission-state]')
         .doesNotExist(
-          'form.submissionState is not present until first validation'
+          'form.submissionState is not present until first validation',
         );
 
       await click('[data-test-submit]');

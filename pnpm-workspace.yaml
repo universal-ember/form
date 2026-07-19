@@ -33,6 +33,12 @@ injectWorkspacePackages: true
 # not ensuring folks are actually compatible with declared ranges.
 resolutionMode: highest
 
+# pnpm 11 re-checks (and re-runs) install before every `pnpm run`.
+# With injected workspace deps + dedupeInjectedDeps the regenerated
+# lockfile trips a false-positive ERR_PNPM_OUTDATED_LOCKFILE in CI
+# (e.g. the floating-deps job), so run scripts against what's installed.
+verifyDepsBeforeRun: false
+
 # Force browserslist-generator v3+ so that rollup-plugin-ts loads under Node 24.
 # v2.x uses the removed `assert { type: 'json' }` import assertion syntax;
 # v3.x uses the standard `with { type: 'json' }` import attribute syntax.

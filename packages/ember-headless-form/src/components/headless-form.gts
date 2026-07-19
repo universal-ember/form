@@ -28,7 +28,7 @@ type ValidateOn = 'change' | 'focusout' | 'submit' | 'input';
 
 export interface HeadlessFormComponentSignature<
   DATA extends UserData,
-  SUBMISSION_VALUE
+  SUBMISSION_VALUE,
 > {
   Element: HTMLFormElement;
   Args: {
@@ -74,7 +74,7 @@ export interface HeadlessFormComponentSignature<
      * Called when the user has submitted the form and no validation errors have been determined. Receives the new form data, or in case of `@dataMode="mutable"` the original data object.
      */
     onSubmit?: (
-      data: FormData<DATA>
+      data: FormData<DATA>,
     ) => SUBMISSION_VALUE | Promise<SUBMISSION_VALUE>;
 
     /**
@@ -82,7 +82,7 @@ export interface HeadlessFormComponentSignature<
      */
     onInvalid?: (
       data: FormData<DATA>,
-      errors: ErrorRecord<FormData<DATA>>
+      errors: ErrorRecord<FormData<DATA>>,
     ) => void;
   };
   Blocks: {
@@ -141,7 +141,7 @@ export interface HeadlessFormComponentSignature<
          * The current form data that is yielded on the form itself and can be used within the template.
          */
         data: DATA;
-      }
+      },
     ];
   };
 }
@@ -151,7 +151,7 @@ export interface HeadlessFormComponentSignature<
  */
 class FieldData<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > {
   constructor(fieldRegistration: FieldRegistrationData<DATA, KEY>) {
     this.validate = fieldRegistration.validate;
@@ -200,7 +200,7 @@ class FieldData<
  */
 export default class HeadlessFormComponent<
   DATA extends UserData,
-  SUBMISSION_VALUE
+  SUBMISSION_VALUE,
 > extends Component<HeadlessFormComponentSignature<DATA, SUBMISSION_VALUE>> {
   FieldComponent = FieldComponent<DATA>;
 
@@ -242,7 +242,7 @@ export default class HeadlessFormComponent<
       getOwnPropertyDescriptor(target, prop) {
         return Reflect.getOwnPropertyDescriptor(
           prop in internalData ? internalData : target,
-          prop
+          prop,
         );
       },
 
@@ -304,11 +304,11 @@ export default class HeadlessFormComponent<
       ? // no need for dynamic validation, as validation always happens on submit
         undefined
       : // when validation happens more frequently than revalidation, then we can ignore revalidation, because the validation handler will already cover us
-      validateOn === 'input' ||
-        (validateOn === 'change' && revalidateOn === 'focusout') ||
-        validateOn === revalidateOn
-      ? undefined
-      : revalidateOn;
+        validateOn === 'input' ||
+          (validateOn === 'change' && revalidateOn === 'focusout') ||
+          validateOn === revalidateOn
+        ? undefined
+        : revalidateOn;
   }
 
   /**
@@ -320,7 +320,7 @@ export default class HeadlessFormComponent<
     // Only consider validation errors for which we actually have a field rendered
     return validationState?.isResolved
       ? Object.keys(validationState.value).some((name) =>
-          this.fields.has(name as FormKey<FormData<DATA>>)
+          this.fields.has(name as FormKey<FormData<DATA>>),
         )
       : false;
   }
@@ -333,7 +333,7 @@ export default class HeadlessFormComponent<
       this.args.ignoreNativeValidation !== true ? this.validateNative() : {};
     const customFormValidation = await this.args.validate?.(
       this.effectiveData,
-      Array.from(this.fields.keys())
+      Array.from(this.fields.keys()),
     );
     const customFieldValidations: ErrorRecord<FormData<DATA>>[] = [];
 
@@ -341,7 +341,7 @@ export default class HeadlessFormComponent<
       const fieldValidationResult = await field.validate?.(
         this.effectiveData[name],
         name,
-        this.effectiveData
+        this.effectiveData,
       );
 
       if (fieldValidationResult) {
@@ -354,7 +354,7 @@ export default class HeadlessFormComponent<
     return mergeErrorRecord(
       nativeValidation,
       customFormValidation,
-      ...customFieldValidations
+      ...customFieldValidations,
     );
   }
 
@@ -371,7 +371,7 @@ export default class HeadlessFormComponent<
 
     assert(
       'Form element expected to be present. If you see this, please report it as a bug to @universal-ember/form!',
-      form
+      form,
     );
 
     if (form.checkValidity()) {
@@ -390,7 +390,7 @@ export default class HeadlessFormComponent<
           el instanceof HTMLButtonElement ||
           el instanceof HTMLFieldSetElement ||
           el instanceof HTMLObjectElement ||
-          el instanceof HTMLOutputElement
+          el instanceof HTMLOutputElement,
       );
 
       if (el.validity.valid) {
@@ -410,7 +410,7 @@ export default class HeadlessFormComponent<
       } else {
         warn(
           `An invalid form element with name "${name}" was detected, but this name is not used as a form field. It will be ignored for validation. Make sure to apply the correct name to custom form elements that participate in form validation!`,
-          { id: 'headless-form.invalid-control-for-unknown-field' }
+          { id: 'headless-form.invalid-control-for-unknown-field' },
         );
       }
     }
@@ -431,10 +431,10 @@ export default class HeadlessFormComponent<
     const visibleErrors: ErrorRecord<FormData<DATA>> = {};
 
     for (const [field, errors] of Object.entries(
-      this.validationState.value
+      this.validationState.value,
     ) as [
       FormKey<FormData<DATA>>,
-      ValidationError<FormData<DATA>[FormKey<FormData<DATA>>]>[]
+      ValidationError<FormData<DATA>[FormKey<FormData<DATA>>]>[],
     ][]) {
       if (this.showErrorsFor(field)) {
         visibleErrors[field] = errors;
@@ -458,11 +458,10 @@ export default class HeadlessFormComponent<
   async onSubmit(e?: Event): Promise<void> {
     e?.preventDefault();
 
-    if(this.validationState?.isPending) {
-      warn(
-        'Async validation is pending, form will not be submitted',
-        { id: 'headless-form.prevent-submit-pending-async-validation' },
-      );
+    if (this.validationState?.isPending) {
+      warn('Async validation is pending, form will not be submitted', {
+        id: 'headless-form.prevent-submit-pending-async-validation',
+      });
 
       return;
     }
@@ -473,14 +472,14 @@ export default class HeadlessFormComponent<
     if (!this.hasValidationErrors) {
       if (this.args.onSubmit) {
         this.submissionState = new TrackedAsyncData(
-          this.args.onSubmit(this.effectiveData)
+          this.args.onSubmit(this.effectiveData),
         );
       }
     } else {
       assert(
         'Validation errors expected to be present. If you see this, please report it as a bug to @universal-ember/form!',
         // Do *not* use optional chaining due to https://github.com/ember-cli/babel-plugin-debug-macros/issues/89
-        this.validationState && this.validationState.isResolved
+        this.validationState && this.validationState.isResolved,
       );
       this.args.onInvalid?.(this.effectiveData, this.validationState.value);
     }
@@ -501,13 +500,13 @@ export default class HeadlessFormComponent<
   @action
   registerField(
     name: FormKey<FormData<DATA>>,
-    field: FieldRegistrationData<FormData<DATA>>
+    field: FieldRegistrationData<FormData<DATA>>,
   ): void {
     assert(
       `You passed @name="${String(
-        name
+        name,
       )}" to the form field, but this is already in use. Names of form fields must be unique!`,
-      !this.fields.has(name)
+      !this.fields.has(name),
     );
     this.fields.set(name, new FieldData(field));
   }
@@ -550,7 +549,7 @@ export default class HeadlessFormComponent<
     } else if (e instanceof Event) {
       warn(
         `An event of type "${e.type}" was received by headless-form, which is supposed to trigger validations for a certain field. But the name of that field could not be determined. Make sure that your control element has a \`name\` attribute matching the field, or use the yielded \`{{field.captureEvents}}\` to capture the events.`,
-        { id: 'headless-form.validation-event-for-unknown-field' }
+        { id: 'headless-form.validation-event-for-unknown-field' },
       );
     }
   }
@@ -574,7 +573,7 @@ export default class HeadlessFormComponent<
     } else {
       warn(
         `An event of type "${e.type}" was received by headless-form, which is supposed to trigger validations for a certain field. But the name of that field could not be determined. Make sure that your control element has a \`name\` attribute matching the field, or use the yielded \`{{field.captureEvents}}\` to capture the events.`,
-        { id: 'headless-form.validation-event-for-unknown-field' }
+        { id: 'headless-form.validation-event-for-unknown-field' },
       );
     }
   }
@@ -582,14 +581,14 @@ export default class HeadlessFormComponent<
   onValidation = elementModifier(
     (
       el: HTMLFormElement,
-      [eventName, handler]: [string | undefined, (e: Event) => void]
+      [eventName, handler]: [string | undefined, (e: Event) => void],
     ) => {
       if (eventName) {
         el.addEventListener(eventName, handler);
 
         return () => el.removeEventListener(eventName, handler);
       }
-    }
+    },
   );
 
   <template>

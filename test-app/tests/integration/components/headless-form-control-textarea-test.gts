@@ -1,5 +1,3 @@
- 
-
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -13,13 +11,15 @@ module('Integration Component HeadlessForm > Textarea', function (hooks) {
   test('field yields textarea component', async function (assert) {
     const data: { comment?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="comment" as |field|>
-          <field.Textarea class="my-textarea" data-test-textarea />
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="comment" as |field|>
+            <field.Textarea class="my-textarea" data-test-textarea />
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('textarea')
@@ -29,7 +29,7 @@ module('Integration Component HeadlessForm > Textarea', function (hooks) {
       .hasAttribute(
         'data-test-textarea',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 });

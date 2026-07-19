@@ -29,7 +29,7 @@ module('Unit | Helpers | validate-yup', function () {
   test('it returns error record if validation fails', async function (assert) {
     const result = await validator(
       { firstName: 'Foo', lastName: 'Smith', email: 'bar' },
-      ['firstName', 'lastName']
+      ['firstName', 'lastName'],
     );
 
     assert.deepEqual(result, {

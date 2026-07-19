@@ -28,7 +28,7 @@ const CaptureEventsModifier = modifier<CaptureEventsModifierSignature>(
         element.removeEventListener(event, handler);
       };
     }
-  }
+  },
 );
 
 export default CaptureEventsModifier;

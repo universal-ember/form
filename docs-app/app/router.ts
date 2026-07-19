@@ -8,7 +8,7 @@ export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
 
-  constructor(...args: [object]) {
+  constructor(...args: ConstructorParameters<typeof EmberRouter>) {
     super(...args);
 
     const scroll = () => window.scrollTo(0, 0);

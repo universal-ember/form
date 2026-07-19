@@ -52,7 +52,7 @@ export interface HeadlessFormControlCheckboxGroupComponentSignature {
           typeof HeadlessFormControlCheckboxGroupLabelComponent,
           'id'
         >;
-      }
+      },
     ];
   };
 }
