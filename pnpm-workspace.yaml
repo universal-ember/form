@@ -7,7 +7,7 @@ packages:
 # super strict mode
 ####################
 autoInstallPeers: false
-strictPeerDependencies: true
+strictPeerDependents: true
 resolvePeersFromWorkspaceRoot: false
 
 ################
@@ -51,3 +51,7 @@ peerDependencyRules:
     # Some transitive deps (e.g. rollup-plugin-ts) do not declare TS 6 support
     # yet, but they work fine.
     typescript: '6'
+
+allowBuilds:
+  core-js: set this to true or false
+  unrs-resolver: set this to true or false
