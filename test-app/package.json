@@ -21,11 +21,10 @@
     "lint:types": "ember-tsc --noEmit",
     "lint:prettier": "prettier -c .",
     "lint:prettier:fix": "prettier -w .",
-    "start": "concurrently 'ember serve' 'sync-pnpm --watch' --names 'test-app serve,test-app sync built package'",
+    "start": "ember serve",
     "test": "ember test",
     "test:ember": "ember test",
-    "typecheck": "pnpm tsc -v; pnpm ember-tsc --version; pnpm lint:types",
-    "_syncPnpm": "pnpm sync-pnpm"
+    "typecheck": "pnpm tsc -v; pnpm ember-tsc --version; pnpm lint:types"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
@@ -82,7 +81,6 @@
     "qunit": "^2.19.3",
     "qunit-dom": "^3.0.0",
     "sinon": "^20.0.0",
-    "sync-pnpm": "workspace:*",
     "typescript": "~6.0.0",
     "validated-changeset": "^1.3.4",
     "webpack": "^5.75.0",

@@ -1,8 +1,11 @@
 packages:
   - 'packages/*'
-  - 'internal/*'
   - 'test-app'
   - 'docs-app'
+
+allowBuilds:
+  core-js: set this to true or false
+  unrs-resolver: set this to true or false
 
 # Force browserslist-generator v3+ so that rollup-plugin-ts loads under Node 24.
 # v2.x uses the removed `assert { type: 'json' }` import assertion syntax;
