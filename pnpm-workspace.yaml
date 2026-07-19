@@ -3,6 +3,36 @@ packages:
   - 'test-app'
   - 'docs-app'
 
+####################
+# super strict mode
+####################
+autoInstallPeers: false
+strictPeerDependencies: true
+resolvePeersFromWorkspaceRoot: false
+
+################
+# Optimizations
+################
+# Less strict, but required for tooling to not barf on duplicate peer trees.
+# (many libraries declare the same peers, which resolve to the same
+#  versions)
+peersSuffixMaxLength: 40
+dedupeInjectedDeps: true
+dedupePeerDependents: true
+publicHoistPattern:
+  - ember-source
+syncInjectedDepsAfterScripts:
+  - build
+  - sync
+injectWorkspacePackages: true
+
+################
+# Compatibility
+################
+# highest is what everyone is used to, but
+# not ensuring folks are actually compatible with declared ranges.
+resolutionMode: highest
+
 # Force browserslist-generator v3+ so that rollup-plugin-ts loads under Node 24.
 # v2.x uses the removed `assert { type: 'json' }` import assertion syntax;
 # v3.x uses the standard `with { type: 'json' }` import attribute syntax.
@@ -21,3 +51,7 @@ peerDependencyRules:
     # Some transitive deps (e.g. rollup-plugin-ts) do not declare TS 6 support
     # yet, but they work fine.
     typescript: '6'
+
+allowBuilds:
+  core-js: set this to true or false
+  unrs-resolver: set this to true or false
