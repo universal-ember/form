@@ -1,5 +1,3 @@
- 
-
 import { render, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -15,13 +13,15 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
   test('field yields input component', async function (assert) {
     const data: { firstName?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="firstName" as |field|>
-          <field.Input class="my-input" data-test-input />
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="firstName" as |field|>
+            <field.Input class="my-input" data-test-input />
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('input')
@@ -31,7 +31,7 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
       .hasAttribute(
         'data-test-input',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
@@ -56,13 +56,15 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
     ];
 
     for (const type of inputTypes) {
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Input @type={{type}} />
-          </form.Field>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Input @type={{type}} />
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert.dom('input').hasAttribute('type', type, `supports type=${type}`);
     }
@@ -76,20 +78,22 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
         assert.strictEqual(
           e.message,
           `Assertion Failed: input component does not support @type="${type}" as there is a dedicated component for this. Please use the \`field.${type}\` instead!`,
-          'Expected assertion error message'
+          'Expected assertion error message',
         );
       });
 
       const data = { checked: false };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="checked" as |field|>
-            {{! @glint-expect-error }}
-            <field.Input @type={{type}} />
-          </form.Field>
-        </HeadlessForm>
-      </template>);
-    })
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="checked" as |field|>
+              {{! @glint-expect-error }}
+              <field.Input @type={{type}} />
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
+    }),
   );
 });

@@ -1,5 +1,3 @@
- 
-
 import { click, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -15,15 +13,17 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
   test('field yields radiogroup component', async function (assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup class="my-radio-group" data-test-radiogroup>
-            Some content
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup class="my-radio-group" data-test-radiogroup>
+              Some content
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('form')
@@ -36,7 +36,7 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAttribute(
         'data-test-radiogroup',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       )
       .hasAttribute('role', 'radiogroup', 'it has a radiogroup role');
   });
@@ -44,15 +44,17 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
   test('radiogroup yields label component', async function (this: RenderingTestContext, assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup data-test-radiogroup as |group|>
-            <group.Label class="my-label" data-test-radiogroup-label>My Group</group.Label>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup data-test-radiogroup as |group|>
+              <group.Label class="my-label" data-test-radiogroup-label>My Group</group.Label>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('form > div > div')
@@ -61,14 +63,14 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAttribute(
         'data-test-radiogroup-label',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
 
     assert.dom('[data-test-radiogroup-label]').hasAttribute(
       'id',
       // copied from https://ihateregex.io/expr/uuid/
       /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/,
-      'input has id with dynamically generated uuid'
+      'input has id with dynamically generated uuid',
     );
 
     const id =
@@ -79,24 +81,26 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAria(
         'labelledby',
         id,
-        'label is connected to radiogroup by `aria-labelledby` attribute'
+        'label is connected to radiogroup by `aria-labelledby` attribute',
       );
   });
 
   test('radiogroup yields radio component', async function (assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Label class="my-label" data-test-label>Foo</radio.Label>
-            </group.Radio>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Label class="my-label" data-test-label>Foo</radio.Label>
+              </group.Radio>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('label')
@@ -105,24 +109,26 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAttribute(
         'data-test-label',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('radio yields label component', async function (assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Label class="my-label" data-test-label>Foo</radio.Label>
-            </group.Radio>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Label class="my-label" data-test-label>Foo</radio.Label>
+              </group.Radio>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('label')
@@ -131,24 +137,26 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAttribute(
         'data-test-label',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('radio yields input component', async function (assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Input class="my-input" data-test-radio />
-            </group.Radio>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Input class="my-input" data-test-radio />
+              </group.Radio>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('input')
@@ -160,31 +168,33 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAttribute(
         'data-test-radio',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('label and input are connected', async function (this: RenderingTestContext, assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Input />
-              <radio.Label>Foo</radio.Label>
-            </group.Radio>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Input />
+                <radio.Label>Foo</radio.Label>
+              </group.Radio>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('input').hasAttribute(
       'id',
       // copied from https://ihateregex.io/expr/uuid/
       /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/,
-      'input has id with dynamically generated uuid'
+      'input has id with dynamically generated uuid',
     );
 
     const id = this.element.querySelector('input')?.id ?? '';
@@ -197,22 +207,24 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
   test('checked property is mapped correctly to @data', async function (assert) {
     const data: { choice?: string } = { choice: 'bar' };
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Input data-test-radio1 />
-              <radio.Label>Foo</radio.Label>
-            </group.Radio>
-            <group.Radio @value="bar" as |radio|>
-              <radio.Input data-test-radio2 />
-              <radio.Label>Bar</radio.Label>
-            </group.Radio>
-          </field.RadioGroup>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Input data-test-radio1 />
+                <radio.Label>Foo</radio.Label>
+              </group.Radio>
+              <group.Radio @value="bar" as |radio|>
+                <radio.Input data-test-radio2 />
+                <radio.Label>Bar</radio.Label>
+              </group.Radio>
+            </field.RadioGroup>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('input[data-test-radio1]').isNotChecked();
     assert.dom('input[data-test-radio2]').isChecked();
@@ -221,32 +233,34 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
   test('validation errors are connected to radiogroup', async function (this: RenderingTestContext, assert) {
     const data: { choice?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="choice" as |field|>
-          <field.RadioGroup data-test-radiogroup as |group|>
-            <group.Radio @value="foo" as |radio|>
-              <radio.Input required data-test-radio1 />
-              <radio.Label>Foo</radio.Label>
-            </group.Radio>
-            <group.Radio @value="bar" as |radio|>
-              <radio.Input required data-test-radio2 />
-              <radio.Label>Bar</radio.Label>
-            </group.Radio>
-          </field.RadioGroup>
-          <field.Errors data-test-errors />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="choice" as |field|>
+            <field.RadioGroup data-test-radiogroup as |group|>
+              <group.Radio @value="foo" as |radio|>
+                <radio.Input required data-test-radio1 />
+                <radio.Label>Foo</radio.Label>
+              </group.Radio>
+              <group.Radio @value="bar" as |radio|>
+                <radio.Input required data-test-radio2 />
+                <radio.Label>Bar</radio.Label>
+              </group.Radio>
+            </field.RadioGroup>
+            <field.Errors data-test-errors />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
 
-      </HeadlessForm>
-    </template>);
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('[data-test-errors]').doesNotExist();
     assert
       .dom('[data-test-radiogroup]')
       .doesNotHaveAria(
         'describedby',
-        'aria-desribedby is not applied when no errors are present'
+        'aria-desribedby is not applied when no errors are present',
       );
 
     await click('[data-test-submit]');
@@ -258,7 +272,7 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
         'id',
         // copied from https://ihateregex.io/expr/uuid/
         /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/,
-        'errors element has id with dynamically generated uuid'
+        'errors element has id with dynamically generated uuid',
       );
 
     const id = this.element.querySelector('[data-test-errors]')?.id ?? '';
@@ -268,7 +282,7 @@ module('Integration Component HeadlessForm > Radio', function (hooks) {
       .hasAria(
         'describedby',
         id,
-        'aria-desribedby is applied when errors are present'
+        'aria-desribedby is applied when errors are present',
       );
   });
 });

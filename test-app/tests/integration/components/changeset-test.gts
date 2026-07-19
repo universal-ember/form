@@ -1,7 +1,5 @@
- 
-
 import { click, fillIn, render, setupOnerror } from '@ember/test-helpers';
-import { module, skip,test } from 'qunit';
+import { module, skip, test } from 'qunit';
 
 import { Changeset } from 'ember-changeset';
 import sinon from 'sinon';
@@ -47,29 +45,31 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
       assert.strictEqual(
         e.message,
         'Assertion Failed: Cannot use `validateChangeset` on `@data` that is not a Changeset instance!',
-        'Expected assertion error message'
+        'Expected assertion error message',
       );
     });
 
     const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{data}}
-        @dataMode="mutable"
-        {{! @glint-expect-error --  a type error is expected here, as this test intentionally has a type mismatch when data not being a changeset }}
-        @validate={{(validateChangeset)}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{data}}
+          @dataMode="mutable"
+          {{! @glint-expect-error --  a type error is expected here, as this test intentionally has a type mismatch when data not being a changeset }}
+          @validate={{(validateChangeset)}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await click('[data-test-submit]');
   });
@@ -79,21 +79,23 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
     const changeset = Changeset(data, validator);
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{changeset}}
-        @dataMode="mutable"
-        @validate={{(validateChangeset)}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{changeset}}
+          @dataMode="mutable"
+          @validate={{(validateChangeset)}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await click('[data-test-submit]');
 
@@ -105,21 +107,23 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
     const changeset = Changeset(data, validator);
     const invalidHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{changeset}}
-        @dataMode="mutable"
-        @validate={{(validateChangeset)}}
-        @onInvalid={{invalidHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{changeset}}
+          @dataMode="mutable"
+          @validate={{(validateChangeset)}}
+          @onInvalid={{invalidHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await click('[data-test-submit]');
 
@@ -133,7 +137,7 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
           },
         ],
       }),
-      '@onInvalid was called'
+      '@onInvalid was called',
     );
   });
 
@@ -142,25 +146,27 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
     const changeset = Changeset(data, validator);
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{changeset}}
-        @dataMode="mutable"
-        @validate={{(validateChangeset)}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <form.Field @name="lastName" as |field|>
-          <field.Label>Last Name</field.Label>
-          <field.Input data-test-last-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{changeset}}
+          @dataMode="mutable"
+          @validate={{(validateChangeset)}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <form.Field @name="lastName" as |field|>
+            <field.Label>Last Name</field.Label>
+            <field.Input data-test-last-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await fillIn('input[data-test-first-name]', 'Nicole');
     await fillIn('input[data-test-last-name]', 'Chung');
@@ -168,7 +174,7 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
 
     assert.true(
       submitHandler.calledWith(changeset),
-      '@onSubmit has been called'
+      '@onSubmit has been called',
     );
   });
 
@@ -176,36 +182,38 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
     const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
     const changeset = Changeset(data, validator);
 
-    await render(<template>
-      <HeadlessForm
-        @data={{changeset}}
-        @dataMode="mutable"
-        @validate={{(validateChangeset)}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-          <field.Errors data-test-first-name-errors />
-        </form.Field>
-        <form.Field @name="lastName" as |field|>
-          <field.Label>Last Name</field.Label>
-          <field.Input data-test-last-name />
-          <field.Errors data-test-last-name-errors />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{changeset}}
+          @dataMode="mutable"
+          @validate={{(validateChangeset)}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+            <field.Errors data-test-first-name-errors />
+          </form.Field>
+          <form.Field @name="lastName" as |field|>
+            <field.Label>Last Name</field.Label>
+            <field.Input data-test-last-name />
+            <field.Errors data-test-last-name-errors />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('[data-test-first-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered before validation happens'
+        'validation errors are not rendered before validation happens',
       );
     assert
       .dom('[data-test-last-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered before validation happens'
+        'validation errors are not rendered before validation happens',
       );
 
     await click('[data-test-submit]');
@@ -216,7 +224,7 @@ module('Integration Component HeadlessForm > Changeset', function (hooks) {
     assert
       .dom('[data-test-last-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered when validation succeeds'
+        'validation errors are not rendered when validation succeeds',
       );
   });
 });

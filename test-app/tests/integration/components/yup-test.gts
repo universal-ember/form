@@ -1,5 +1,3 @@
- 
-
 import { click, fillIn, render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -31,20 +29,22 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
     const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{data}}
-        @validate={{validateYup schema}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{data}}
+          @validate={{validateYup schema}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await click('[data-test-submit]');
 
@@ -55,20 +55,22 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
     const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
     const invalidHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{data}}
-        @validate={{validateYup schema}}
-        @onInvalid={{invalidHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{data}}
+          @validate={{validateYup schema}}
+          @onInvalid={{invalidHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await click('[data-test-submit]');
 
@@ -82,7 +84,7 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
           },
         ],
       }),
-      '@onInvalid was called'
+      '@onInvalid was called',
     );
   });
 
@@ -90,24 +92,26 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
     const data: TestFormData = {};
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{data}}
-        @validate={{validateYup schema}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <form.Field @name="lastName" as |field|>
-          <field.Label>Last Name</field.Label>
-          <field.Input data-test-last-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{data}}
+          @validate={{validateYup schema}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <form.Field @name="lastName" as |field|>
+            <field.Label>Last Name</field.Label>
+            <field.Input data-test-last-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     await fillIn('input[data-test-first-name]', 'Nicole');
     await fillIn('input[data-test-last-name]', 'Chung');
@@ -118,38 +122,40 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
         firstName: 'Nicole',
         lastName: 'Chung',
       }),
-      '@onSubmit has been called'
+      '@onSubmit has been called',
     );
   });
 
   test('validation errors are exposed as field.Errors on submit', async function (assert) {
     const data: TestFormData = { firstName: 'Foo', lastName: 'Smith' };
 
-    await render(<template>
-      <HeadlessForm @data={{data}} @validate={{validateYup schema}} as |form|>
-        <form.Field @name="firstName" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-          <field.Errors data-test-first-name-errors />
-        </form.Field>
-        <form.Field @name="lastName" as |field|>
-          <field.Label>Last Name</field.Label>
-          <field.Input data-test-last-name />
-          <field.Errors data-test-last-name-errors />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} @validate={{validateYup schema}} as |form|>
+          <form.Field @name="firstName" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+            <field.Errors data-test-first-name-errors />
+          </form.Field>
+          <form.Field @name="lastName" as |field|>
+            <field.Label>Last Name</field.Label>
+            <field.Input data-test-last-name />
+            <field.Errors data-test-last-name-errors />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('[data-test-first-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered before validation happens'
+        'validation errors are not rendered before validation happens',
       );
     assert
       .dom('[data-test-last-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered before validation happens'
+        'validation errors are not rendered before validation happens',
       );
 
     await click('[data-test-submit]');
@@ -160,7 +166,7 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
     assert
       .dom('[data-test-last-name-errors]')
       .doesNotExist(
-        'validation errors are not rendered when validation succeeds'
+        'validation errors are not rendered when validation succeeds',
       );
   });
 
@@ -170,20 +176,22 @@ module('Integration Component HeadlessForm > yup', function (hooks) {
     const data: { foo?: string } = {};
     const submitHandler = sinon.spy();
 
-    await render(<template>
-      <HeadlessForm
-        @data={{data}}
-        {{! @glint-expect-error }}
-        @validate={{validateYup schema}}
-        @onSubmit={{submitHandler}}
-        as |form|
-      >
-        <form.Field @name="foo" as |field|>
-          <field.Label>First Name</field.Label>
-          <field.Input data-test-first-name />
-        </form.Field>
-        <button type="submit" data-test-submit>Submit</button>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm
+          @data={{data}}
+          {{! @glint-expect-error }}
+          @validate={{validateYup schema}}
+          @onSubmit={{submitHandler}}
+          as |form|
+        >
+          <form.Field @name="foo" as |field|>
+            <field.Label>First Name</field.Label>
+            <field.Input data-test-first-name />
+          </form.Field>
+          <button type="submit" data-test-submit>Submit</button>
+        </HeadlessForm>
+      </template>,
+    );
   });
 });

@@ -16,6 +16,8 @@ export interface HeadlessFormControlCheckboxGroupLabelComponentSignature {
 }
 
 const HeadlessFormControlCheckboxGroupLabelComponent: TemplateOnlyComponent<HeadlessFormControlCheckboxGroupLabelComponentSignature> =
-  <template><div id={{@id}} ...attributes>{{yield}}</div></template>;
+  <template>
+    <div id={{@id}} ...attributes>{{yield}}</div>
+  </template>;
 
 export default HeadlessFormControlCheckboxGroupLabelComponent;

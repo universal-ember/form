@@ -16,6 +16,8 @@ export interface HeadlessFormControlRadioGroupLabelComponentSignature {
 }
 
 const HeadlessFormControlRadioGroupLabelComponent: TemplateOnlyComponent<HeadlessFormControlRadioGroupLabelComponentSignature> =
-  <template><div id={{@id}} ...attributes>{{yield}}</div></template>;
+  <template>
+    <div id={{@id}} ...attributes>{{yield}}</div>
+  </template>;
 
 export default HeadlessFormControlRadioGroupLabelComponent;

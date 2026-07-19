@@ -1,5 +1,3 @@
- 
-
 import Component from '@glimmer/component';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
@@ -56,17 +54,19 @@ module(
       const data: TestFormData = { custom: 'foo' };
       const submitHandler = sinon.spy();
 
-      await render(<template>
-        <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
-          <form.Field @name="custom" as |field|>
-            <CustomControl
-              @value={{field.value}}
-              @onChange={{field.setValue}}
-            />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} @onSubmit={{submitHandler}} as |form|>
+            <form.Field @name="custom" as |field|>
+              <CustomControl
+                @value={{field.value}}
+                @onChange={{field.setValue}}
+              />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert.dom('[data-test-custom-control]').hasValue('foo');
 
@@ -79,19 +79,21 @@ module(
     test('yielded id can be used to connect label with custom control', async function (this: RenderingTestContext, assert) {
       const data: TestFormData = { custom: 'foo' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="custom" as |field|>
-            <field.Label>Custom</field.Label>
-            <CustomControl
-              @value={{field.value}}
-              @onChange={{field.setValue}}
-              id={{field.id}}
-            />
-          </form.Field>
-          <button type="submit" data-test-submit>Submit</button>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="custom" as |field|>
+              <field.Label>Custom</field.Label>
+              <CustomControl
+                @value={{field.value}}
+                @onChange={{field.setValue}}
+                id={{field.id}}
+              />
+            </form.Field>
+            <button type="submit" data-test-submit>Submit</button>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert.dom('[data-test-custom-control]').hasAttribute('id');
 
@@ -102,7 +104,7 @@ module(
         .hasAttribute(
           'for',
           id,
-          'label is attached to input by `for` attribute'
+          'label is attached to input by `for` attribute',
         );
     });
 
@@ -113,22 +115,24 @@ module(
           { type: 'invalidate', value: undefined, message: 'Invalid value!' },
         ]);
 
-        await render(<template>
-          <HeadlessForm @data={{data}} as |form|>
-            <form.Field
-              @name="custom"
-              @validate={{validateCallback}}
-              as |field|
-            >
-              <CustomControl
-                @value={{field.value}}
-                @onChange={{field.setValue}}
-                aria-invalid={{if field.isInvalid "true"}}
-              />
-            </form.Field>
-            <button type="submit" data-test-submit>Submit</button>
-          </HeadlessForm>
-        </template>);
+        await render(
+          <template>
+            <HeadlessForm @data={{data}} as |form|>
+              <form.Field
+                @name="custom"
+                @validate={{validateCallback}}
+                as |field|
+              >
+                <CustomControl
+                  @value={{field.value}}
+                  @onChange={{field.setValue}}
+                  aria-invalid={{if field.isInvalid "true"}}
+                />
+              </form.Field>
+              <button type="submit" data-test-submit>Submit</button>
+            </HeadlessForm>
+          </template>,
+        );
 
         assert.dom('[data-test-custom-control]').doesNotHaveAria('invalid');
 
@@ -143,23 +147,25 @@ module(
           { type: 'invalidate', value: undefined, message: 'Invalid value!' },
         ]);
 
-        await render(<template>
-          <HeadlessForm @data={{data}} as |form|>
-            <form.Field
-              @name="custom"
-              @validate={{validateCallback}}
-              as |field|
-            >
-              <CustomControl
-                @value={{field.value}}
-                @onChange={{field.setValue}}
-                aria-describedby={{if field.isInvalid field.errorId}}
-              />
-              <field.Errors data-test-errors />
-            </form.Field>
-            <button type="submit" data-test-submit>Submit</button>
-          </HeadlessForm>
-        </template>);
+        await render(
+          <template>
+            <HeadlessForm @data={{data}} as |form|>
+              <form.Field
+                @name="custom"
+                @validate={{validateCallback}}
+                as |field|
+              >
+                <CustomControl
+                  @value={{field.value}}
+                  @onChange={{field.setValue}}
+                  aria-describedby={{if field.isInvalid field.errorId}}
+                />
+                <field.Errors data-test-errors />
+              </form.Field>
+              <button type="submit" data-test-submit>Submit</button>
+            </HeadlessForm>
+          </template>,
+        );
 
         assert.dom('[data-test-custom-control]').doesNotHaveAria('describedby');
 
@@ -172,7 +178,7 @@ module(
           .hasAria(
             'describedby',
             id,
-            'errors are associated to invalid input via aria-describedby'
+            'errors are associated to invalid input via aria-describedby',
           );
       });
 
@@ -182,42 +188,44 @@ module(
           { type: 'invalidate', value: undefined, message: 'Invalid value!' },
         ]);
 
-        await render(<template>
-          <HeadlessForm @data={{data}} as |form|>
-            <form.Field
-              @name="custom"
-              @validate={{validateCallback}}
-              as |field|
-            >
-              <CustomControl
-                @value={{field.value}}
-                @onChange={{field.setValue}}
-              />
-              <button
-                type="button"
-                {{on "click" field.triggerValidation}}
-                data-test-validate
+        await render(
+          <template>
+            <HeadlessForm @data={{data}} as |form|>
+              <form.Field
+                @name="custom"
+                @validate={{validateCallback}}
+                as |field|
               >
-                Validate now!
-              </button>
-              <field.Errors data-test-date-errors />
-            </form.Field>
-            <button type="submit" data-test-submit>Submit</button>
-          </HeadlessForm>
-        </template>);
+                <CustomControl
+                  @value={{field.value}}
+                  @onChange={{field.setValue}}
+                />
+                <button
+                  type="button"
+                  {{on "click" field.triggerValidation}}
+                  data-test-validate
+                >
+                  Validate now!
+                </button>
+                <field.Errors data-test-date-errors />
+              </form.Field>
+              <button type="submit" data-test-submit>Submit</button>
+            </HeadlessForm>
+          </template>,
+        );
 
         await click('[data-test-validate]');
 
         assert.true(
           validateCallback.calledWith('foo', 'custom', data),
-          '@validate is called with form data'
+          '@validate is called with form data',
         );
 
         assert
           .dom('[data-test-date-errors]')
           .exists(
             { count: 1 },
-            'validation errors appear when validation fails'
+            'validation errors appear when validation fails',
           );
       });
 
@@ -232,23 +240,25 @@ module(
             },
           ]);
 
-          await render(<template>
-            <HeadlessForm @data={{data}} @validateOn="focusout" as |form|>
-              <form.Field
-                @name="custom"
-                @validate={{validateCallback}}
-                as |field|
-              >
-                <CustomControl
-                  @value={{field.value}}
-                  @onChange={{field.setValue}}
-                  {{field.captureEvents}}
-                />
-                <field.Errors data-test-date-errors />
-              </form.Field>
-              <button type="submit" data-test-submit>Submit</button>
-            </HeadlessForm>
-          </template>);
+          await render(
+            <template>
+              <HeadlessForm @data={{data}} @validateOn="focusout" as |form|>
+                <form.Field
+                  @name="custom"
+                  @validate={{validateCallback}}
+                  as |field|
+                >
+                  <CustomControl
+                    @value={{field.value}}
+                    @onChange={{field.setValue}}
+                    {{field.captureEvents}}
+                  />
+                  <field.Errors data-test-date-errors />
+                </form.Field>
+                <button type="submit" data-test-submit>Submit</button>
+              </HeadlessForm>
+            </template>,
+          );
 
           // the input that triggers the blur does *not* have a name that would allow headless-form to understand from which field this event is coming from
           // but applying {{captureEvents}} will make headless-form be able to assiciate it to the name of the field
@@ -257,14 +267,14 @@ module(
 
           assert.true(
             validateCallback.calledWith('foo', 'custom', data),
-            '@validate is called with form data'
+            '@validate is called with form data',
           );
 
           assert
             .dom('[data-test-date-errors]')
             .exists(
               { count: 1 },
-              'validation errors appear when validation fails'
+              'validation errors appear when validation fails',
             );
         });
 
@@ -278,8 +288,58 @@ module(
             },
           ]);
 
-          await render(<template>
-            <HeadlessForm @data={{data}} @validateOn="change" as |form|>
+          await render(
+            <template>
+              <HeadlessForm @data={{data}} @validateOn="change" as |form|>
+                <form.Field
+                  @name="custom"
+                  @validate={{validateCallback}}
+                  as |field|
+                >
+                  <CustomControl
+                    @value={{field.value}}
+                    @onChange={{field.setValue}}
+                    {{field.captureEvents}}
+                  />
+                  <field.Errors data-test-date-errors />
+                </form.Field>
+                <button type="submit" data-test-submit>Submit</button>
+              </HeadlessForm>
+            </template>,
+          );
+
+          // the input that triggers the blur does *not* have a name that would allow headless-form to understand from which field this event is coming from
+          // but applying {{captureEvents}} will make headless-form be able to assiciate it to the name of the field
+          await triggerEvent('[data-test-custom-control', 'change');
+
+          assert.true(
+            validateCallback.calledWith('foo', 'custom', data),
+            '@validate is called with form data',
+          );
+
+          assert
+            .dom('[data-test-date-errors]')
+            .exists(
+              { count: 1 },
+              'validation errors appear when validation fails',
+            );
+        });
+      });
+
+      test('captures blur/change events triggering re-/validation without controls having name matching field name when @validateOn="focusout" and @revalidateOn="change"', async function (assert) {
+        const data: TestFormData = { custom: 'foo' };
+        const validateCallback = sinon.fake.returns([
+          { type: 'invalid-date', value: undefined, message: 'Invalid Date!' },
+        ]);
+
+        await render(
+          <template>
+            <HeadlessForm
+              @data={{data}}
+              @validateOn="focusout"
+              @revalidateOn="change"
+              as |form|
+            >
               <form.Field
                 @name="custom"
                 @validate={{validateCallback}}
@@ -294,60 +354,14 @@ module(
               </form.Field>
               <button type="submit" data-test-submit>Submit</button>
             </HeadlessForm>
-          </template>);
-
-          // the input that triggers the blur does *not* have a name that would allow headless-form to understand from which field this event is coming from
-          // but applying {{captureEvents}} will make headless-form be able to assiciate it to the name of the field
-          await triggerEvent('[data-test-custom-control', 'change');
-
-          assert.true(
-            validateCallback.calledWith('foo', 'custom', data),
-            '@validate is called with form data'
-          );
-
-          assert
-            .dom('[data-test-date-errors]')
-            .exists(
-              { count: 1 },
-              'validation errors appear when validation fails'
-            );
-        });
-      });
-
-      test('captures blur/change events triggering re-/validation without controls having name matching field name when @validateOn="focusout" and @revalidateOn="change"', async function (assert) {
-        const data: TestFormData = { custom: 'foo' };
-        const validateCallback = sinon.fake.returns([
-          { type: 'invalid-date', value: undefined, message: 'Invalid Date!' },
-        ]);
-
-        await render(<template>
-          <HeadlessForm
-            @data={{data}}
-            @validateOn="focusout"
-            @revalidateOn="change"
-            as |form|
-          >
-            <form.Field
-              @name="custom"
-              @validate={{validateCallback}}
-              as |field|
-            >
-              <CustomControl
-                @value={{field.value}}
-                @onChange={{field.setValue}}
-                {{field.captureEvents}}
-              />
-              <field.Errors data-test-date-errors />
-            </form.Field>
-            <button type="submit" data-test-submit>Submit</button>
-          </HeadlessForm>
-        </template>);
+          </template>,
+        );
 
         await triggerEvent('[data-test-custom-control', 'change');
 
         assert.false(
           validateCallback.called,
-          '@validate is not called until blur'
+          '@validate is not called until blur',
         );
         assert
           .dom('[data-test-date-errors]')
@@ -358,23 +372,23 @@ module(
 
         assert.true(
           validateCallback.calledWith('foo', 'custom', data),
-          '@validate is called with form data'
+          '@validate is called with form data',
         );
 
         assert
           .dom('[data-test-date-errors]')
           .exists(
             { count: 1 },
-            'validation errors appear when validation fails'
+            'validation errors appear when validation fails',
           );
 
         await triggerEvent('[data-test-custom-control', 'change');
 
         assert.true(
           validateCallback.calledTwice,
-          '@validate is called again on change for revalidation, after initial validation has happened'
+          '@validate is called again on change for revalidation, after initial validation has happened',
         );
       });
     });
-  }
+  },
 );

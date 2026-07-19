@@ -1,5 +1,3 @@
- 
-
 import { render, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -13,9 +11,9 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders form markup', async function (assert) {
-    await render(<template>
-      <HeadlessForm class="foo" autocomplete="off" />
-    </template>);
+    await render(
+      <template><HeadlessForm class="foo" autocomplete="off" /></template>,
+    );
 
     assert.dom('form').exists('it renders as <form>');
     assert
@@ -24,38 +22,47 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
       .hasAttribute(
         'autocomplete',
         'off',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('form effective data renders correctly', async function (this: RenderingTestContext, assert) {
-    const data = { firstName: 'Hank'};
+    const data = { firstName: 'Hank' };
 
     await render(
-    <template>
-      <HeadlessForm @data={{data}} as |form|>
-        <div data-test-effective-data>
-          {{form.data.firstName}}
-        </div>
-      </HeadlessForm>
-    </template>)
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <div data-test-effective-data>
+            {{form.data.firstName}}
+          </div>
+        </HeadlessForm>
+      </template>,
+    );
 
-    const testName = (this.element.querySelector("div[data-test-effective-data]") as HTMLElement).innerText;
+    const testName = (
+      this.element.querySelector('div[data-test-effective-data]') as HTMLElement
+    ).innerText;
 
-    assert.strictEqual(testName, data.firstName, "effective data within form matches given");
-  })
+    assert.strictEqual(
+      testName,
+      data.firstName,
+      'effective data within form matches given',
+    );
+  });
 
   module('form.Field', function () {
     test('form yields field component', async function (assert) {
       const data = { firstName: 'Simon' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName">
-            <div data-test-user-content>foo</div>
-          </form.Field>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName">
+              <div data-test-user-content>foo</div>
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('[data-test-user-content]')
@@ -76,29 +83,33 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
         assert.strictEqual(
           e.message,
           'Assertion Failed: You passed @name="firstName" to the form field, but this is already in use. Names of form fields must be unique!',
-          'Expected assertion error message'
+          'Expected assertion error message',
         );
       });
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" />
-          <form.Field @name="firstName" />
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" />
+            <form.Field @name="firstName" />
+          </HeadlessForm>
+        </template>,
+      );
     });
 
     test('id is yielded from field component', async function (this: RenderingTestContext, assert) {
       const data = { firstName: 'Simon' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <div data-test-id>{{field.id}}</div>
-            <field.Input />
-          </form.Field>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <div data-test-id>{{field.id}}</div>
+              <field.Input />
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
 
       const inputId = this.element.querySelector('input')?.id;
       const id = (this.element.querySelector('[data-test-id]') as HTMLElement)
@@ -112,13 +123,15 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
     test('field yields label component', async function (assert) {
       const data = { firstName: 'Simon' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label class="my-label" data-test-label>First Name</field.Label>
-          </form.Field>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label class="my-label" data-test-label>First Name</field.Label>
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert
         .dom('label')
@@ -127,27 +140,29 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
         .hasAttribute(
           'data-test-label',
           '',
-          'it accepts arbitrary HTML attributes'
+          'it accepts arbitrary HTML attributes',
         );
     });
 
     test('label and input are connected', async function (this: RenderingTestContext, assert) {
       const data = { firstName: 'Simon' };
 
-      await render(<template>
-        <HeadlessForm @data={{data}} as |form|>
-          <form.Field @name="firstName" as |field|>
-            <field.Label>First Name</field.Label>
-            <field.Input />
-          </form.Field>
-        </HeadlessForm>
-      </template>);
+      await render(
+        <template>
+          <HeadlessForm @data={{data}} as |form|>
+            <form.Field @name="firstName" as |field|>
+              <field.Label>First Name</field.Label>
+              <field.Input />
+            </form.Field>
+          </HeadlessForm>
+        </template>,
+      );
 
       assert.dom('input').hasAttribute(
         'id',
         // copied from https://ihateregex.io/expr/uuid/
         /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/,
-        'input has id with dynamically generated uuid'
+        'input has id with dynamically generated uuid',
       );
 
       const id = this.element.querySelector('input')?.id ?? '';
@@ -157,7 +172,7 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
         .hasAttribute(
           'for',
           id,
-          'label is attached to input by `for` attribute'
+          'label is attached to input by `for` attribute',
         );
     });
   });

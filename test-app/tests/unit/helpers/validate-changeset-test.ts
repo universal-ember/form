@@ -40,10 +40,14 @@ module('Unit | Helpers | validate-changeset', function () {
   test('it returns error record if validation fails', async function (assert) {
     const changeset = Changeset(
       { firstName: 'foo', lastName: 'Smith' },
-      validator
+      validator,
     );
 
-    const result = await validate(changeset, ['firstName', 'lastName', 'email']);
+    const result = await validate(changeset, [
+      'firstName',
+      'lastName',
+      'email',
+    ]);
 
     assert.deepEqual(result, {
       firstName: [

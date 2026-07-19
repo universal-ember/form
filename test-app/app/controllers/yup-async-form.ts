@@ -36,7 +36,7 @@ export default class IndexController extends Controller {
             }
 
             return true;
-          }
+          },
         ),
     });
   }

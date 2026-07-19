@@ -26,7 +26,7 @@ export interface ValidationError<T = unknown> {
 
 export type ErrorRecord<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > = Partial<Record<KEY, ValidationError<DATA[KEY]>[]>>;
 
 /**
@@ -34,7 +34,7 @@ export type ErrorRecord<
  */
 export type FormValidateCallback<DATA extends FormData> = (
   formData: DATA,
-  fields: Array<FormKey<DATA>>
+  fields: Array<FormKey<DATA>>,
 ) => undefined | ErrorRecord<DATA> | Promise<undefined | ErrorRecord<DATA>>;
 
 /**
@@ -42,11 +42,11 @@ export type FormValidateCallback<DATA extends FormData> = (
  */
 export type FieldValidateCallback<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > = (
   fieldValue: DATA[KEY],
   fieldName: KEY,
-  formData: DATA
+  formData: DATA,
 ) =>
   | undefined
   | ValidationError<DATA[KEY]>[]
@@ -58,7 +58,7 @@ export type FieldValidateCallback<
  */
 export interface FieldRegistrationData<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > {
   validate?: FieldValidateCallback<DATA, KEY>;
 }
@@ -69,12 +69,12 @@ export interface FieldRegistrationData<
  */
 export type RegisterFieldCallback<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > = (name: KEY, field: FieldRegistrationData<DATA, KEY>) => void;
 
 export type UnregisterFieldCallback<
   DATA extends FormData,
-  KEY extends FormKey<DATA> = FormKey<DATA>
+  KEY extends FormKey<DATA> = FormKey<DATA>,
 > = (name: KEY) => void;
 
 /**

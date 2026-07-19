@@ -46,7 +46,7 @@ export interface HeadlessFormControlRadioComponentSignature {
           typeof HeadlessFormControlRadioInputComponent,
           'fieldId' | 'value' | 'setValue' | 'checked' | 'name'
         >;
-      }
+      },
     ];
   };
 }

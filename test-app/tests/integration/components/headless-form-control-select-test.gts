@@ -1,5 +1,3 @@
- 
-
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
@@ -13,13 +11,15 @@ module('Integration Component HeadlessForm > Select', function (hooks) {
   test('field yields select component', async function (assert) {
     const data: { selected?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="selected" as |field|>
-          <field.Select class="my-select" data-test-select />
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="selected" as |field|>
+            <field.Select class="my-select" data-test-select />
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert
       .dom('select')
@@ -29,23 +29,31 @@ module('Integration Component HeadlessForm > Select', function (hooks) {
       .hasAttribute(
         'data-test-select',
         '',
-        'it accepts arbitrary HTML attributes'
+        'it accepts arbitrary HTML attributes',
       );
   });
 
   test('select yields option component', async function (assert) {
     const data: { selected?: string } = {};
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="selected" as |field|>
-          <field.Select as |select|>
-            <select.Option @value="foo" data-test-option-foo>Foo</select.Option>
-            <select.Option @value="bar" data-test-option-bar>Bar</select.Option>
-          </field.Select>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="selected" as |field|>
+            <field.Select as |select|>
+              <select.Option
+                @value="foo"
+                data-test-option-foo
+              >Foo</select.Option>
+              <select.Option
+                @value="bar"
+                data-test-option-bar
+              >Bar</select.Option>
+            </field.Select>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('select > option').exists({ count: 2 }, 'renders options');
 
@@ -63,16 +71,24 @@ module('Integration Component HeadlessForm > Select', function (hooks) {
   test('selected property is mapped correctly to @data', async function (assert) {
     const data: { selected?: string } = { selected: 'bar' };
 
-    await render(<template>
-      <HeadlessForm @data={{data}} as |form|>
-        <form.Field @name="selected" as |field|>
-          <field.Select as |select|>
-            <select.Option @value="foo" data-test-option-foo>Foo</select.Option>
-            <select.Option @value="bar" data-test-option-bar>Bar</select.Option>
-          </field.Select>
-        </form.Field>
-      </HeadlessForm>
-    </template>);
+    await render(
+      <template>
+        <HeadlessForm @data={{data}} as |form|>
+          <form.Field @name="selected" as |field|>
+            <field.Select as |select|>
+              <select.Option
+                @value="foo"
+                data-test-option-foo
+              >Foo</select.Option>
+              <select.Option
+                @value="bar"
+                data-test-option-bar
+              >Bar</select.Option>
+            </field.Select>
+          </form.Field>
+        </HeadlessForm>
+      </template>,
+    );
 
     assert.dom('option[data-test-option-foo]').doesNotHaveAttribute('selected');
     assert.dom('option[data-test-option-bar]').hasAttribute('selected');
