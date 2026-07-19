@@ -69,6 +69,7 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
   });
 
   ['checkbox', 'radio'].forEach((type) =>
+    // eslint-disable-next-line qunit/require-expect -- setupOnerror callback needs assert count check
     test(`input throws for ${type} type handled by dedicated component`, async function (assert) {
       assert.expect(1);
       setupOnerror((e: Error) => {

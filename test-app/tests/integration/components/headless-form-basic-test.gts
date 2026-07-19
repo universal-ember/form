@@ -66,6 +66,7 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
         .exists('field component contains no markup itself');
     });
 
+    // eslint-disable-next-line qunit/require-expect -- setupOnerror callback needs assert count check
     test('@name must be unique', async function (assert) {
       assert.expect(1);
 

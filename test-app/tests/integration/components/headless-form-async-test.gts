@@ -224,6 +224,7 @@ module('Integration Component HeadlessForm > Async state', function (hooks) {
       const data: TestFormData = { firstName: 'Tony', lastName: 'Ward' };
       const submitHandler = (): Promise<string> =>
         new Promise((_resolve, reject) => {
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- intentionally rejecting with a non-Error to test that path
           setTimeout(() => reject('ERROR'), 10);
         });
 
