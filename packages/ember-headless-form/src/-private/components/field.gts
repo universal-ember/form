@@ -29,7 +29,7 @@ import type { ModifierLike, WithBoundArgs } from '@glint/template';
 
 export interface HeadlessFormFieldComponentSignature<
   DATA extends UserData,
-  KEY extends FormKey<FormData<DATA>> = FormKey<FormData<DATA>>
+  KEY extends FormKey<FormData<DATA>> = FormKey<FormData<DATA>>,
 > {
   Args: {
     /**
@@ -212,14 +212,14 @@ export interface HeadlessFormFieldComponentSignature<
           ModifierLike<CaptureEventsModifierSignature>,
           'event' | 'triggerValidation'
         >;
-      }
+      },
     ];
   };
 }
 
 export default class HeadlessFormFieldComponent<
   DATA extends FormData,
-  KEY extends FormKey<FormData<DATA>> = FormKey<FormData<DATA>>
+  KEY extends FormKey<FormData<DATA>> = FormKey<FormData<DATA>>,
 > extends Component<HeadlessFormFieldComponentSignature<DATA, KEY>> {
   LabelComponent = LabelComponent;
   InputComponent = InputComponent;
@@ -233,13 +233,13 @@ export default class HeadlessFormFieldComponent<
 
   constructor(
     owner: unknown,
-    args: HeadlessFormFieldComponentSignature<DATA, KEY>['Args']
+    args: HeadlessFormFieldComponentSignature<DATA, KEY>['Args'],
   ) {
     super(owner, args);
 
     assert(
       'Nested property paths in @name are not supported.',
-      typeof this.args.name !== 'string' || !this.args.name.includes('.')
+      typeof this.args.name !== 'string' || !this.args.name.includes('.'),
     );
 
     this.args.registerField(this.args.name, {
@@ -256,7 +256,7 @@ export default class HeadlessFormFieldComponent<
   get value(): DATA[KEY] {
     // when @mutableData is set, data is something we don't control, i.e. might require old-school get() to be on the safe side
     // we do not want to support nested property paths for now though, see the constructor assertion!
-    return get(this.args.data, this.args.name) as DATA[KEY];
+    return get(this.args.data, this.args.name);
   }
 
   get errors(): ValidationError<DATA[KEY]>[] | undefined {
@@ -270,9 +270,9 @@ export default class HeadlessFormFieldComponent<
   get valueAsString(): string | undefined {
     assert(
       `Only string values are expected for ${String(
-        this.args.name
+        this.args.name,
       )}, but you passed ${typeof this.value}`,
-      typeof this.value === 'undefined' || typeof this.value === 'string'
+      typeof this.value === 'undefined' || typeof this.value === 'string',
     );
 
     return this.value;
@@ -280,12 +280,10 @@ export default class HeadlessFormFieldComponent<
 
   get valueAllAsString(): string[] {
     assert(
-      `Only string values are expected for ${String(
-        this.args.name
-      )}`,
+      `Only string values are expected for ${String(this.args.name)}`,
       typeof this.value === 'undefined' ||
         (Array.isArray(this.value) &&
-          this.value.every((v) => typeof v === 'string'))
+          this.value.every((v) => typeof v === 'string')),
     );
 
     return this.value ?? [];
@@ -294,11 +292,11 @@ export default class HeadlessFormFieldComponent<
   get valueAsStringOrNumber(): string | number | undefined {
     assert(
       `Only string or number values are expected for ${String(
-        this.args.name
+        this.args.name,
       )}, but you passed ${typeof this.value}`,
       typeof this.value === 'undefined' ||
         typeof this.value === 'string' ||
-        typeof this.value === 'number'
+        typeof this.value === 'number',
     );
 
     return this.value;
@@ -307,9 +305,9 @@ export default class HeadlessFormFieldComponent<
   get valueAsBoolean(): boolean | undefined {
     assert(
       `Only boolean values are expected for ${String(
-        this.args.name
+        this.args.name,
       )}, but you passed ${typeof this.value}`,
-      typeof this.value === 'undefined' || typeof this.value === 'boolean'
+      typeof this.value === 'undefined' || typeof this.value === 'boolean',
     );
 
     return this.value;
@@ -322,10 +320,7 @@ export default class HeadlessFormFieldComponent<
 
   <template>
     {{#let
-      (uniqueId)
-      (uniqueId)
-      (fn @set @name)
-      (fn @triggerValidationFor @name)
+      (uniqueId) (uniqueId) (fn @set @name) (fn @triggerValidationFor @name)
       as |fieldId errorId setValue triggerValidation|
     }}
       {{yield
