@@ -9,3 +9,16 @@ packages:
 # v3.x uses the standard `with { type: 'json' }` import attribute syntax.
 overrides:
   browserslist-generator: ^3.0.0
+
+peerDependencyRules:
+  ignoreMissing:
+    - ember-cli-htmlbars
+    - '@babel/core'
+    # Old glint envs are still declared as peers by some transitive deps
+    # (e.g. @crowdstrike/ember-oss-docs); the new glint setup no longer
+    # ships them, so ignore.
+    - '@glint/environment-ember-loose'
+  allowedVersions:
+    # Some transitive deps (e.g. rollup-plugin-ts) do not declare TS 6 support
+    # yet, but they work fine.
+    typescript: '6'
