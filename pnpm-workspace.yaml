@@ -63,4 +63,6 @@ peerDependencyRules:
 
 allowBuilds:
   core-js: false
+  # vite 7 (used by the compat try-scenarios) depends on esbuild
+  esbuild: true
   unrs-resolver: true

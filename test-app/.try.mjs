@@ -10,7 +10,13 @@ const compatFiles = {
 const { compatBuild } = require('@embroider/compat');
 module.exports = async function (defaults) {
   const { buildOnce } = await import('@embroider/vite');
-  let app = new EmberApp(defaults);
+  let app = new EmberApp(defaults, {
+    '@embroider/macros': {
+      setOwnConfig: {
+        supportsEmberData: true,
+      },
+    },
+  });
   return compatBuild(app, buildOnce);
 };`,
   'config/optional-features.json': JSON.stringify({
@@ -42,23 +48,10 @@ export default defineConfig({
     },
   },
 });`,
-  'babel.config.js': `import { buildMacros } from '@embroider/macros/babel';
-import {
+  'babel.config.js': `import {
   babelCompatSupport,
   templateCompatSupport,
 } from '@embroider/compat/babel';
-
-const macros = buildMacros({
-  configure(config) {
-    config.setOwnConfig(import.meta.dirname, {
-      supportsEmberData: true,
-    });
-
-    if (process.env.EMBER_ENV === 'test') {
-      config.enableRuntimeMode();
-    }
-  },
-});
 
 export default {
   plugins: [
