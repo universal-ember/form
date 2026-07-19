@@ -487,7 +487,7 @@ export default class HeadlessFormComponent<
   }
 
   @action
-  async onReset(e?: Event): Promise<void> {
+  onReset(e?: Event): void {
     e?.preventDefault();
 
     for (const key of Object.keys(this.internalData)) {

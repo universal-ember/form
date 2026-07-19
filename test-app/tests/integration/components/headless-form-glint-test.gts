@@ -1,10 +1,11 @@
-/* eslint-disable no-undef -- Until https://github.com/ember-cli/eslint-plugin-ember/issues/1747 is resolved... */
+ 
 
 import { render } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from '@universal-ember/form';
 import { setupRenderingTest } from 'test-app/tests/helpers';
+
+import { HeadlessForm } from '@universal-ember/form';
 
 module('Integration Component HeadlessForm > Glint', function (hooks) {
   setupRenderingTest(hooks);

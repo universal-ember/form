@@ -1,10 +1,11 @@
-/* eslint-disable no-undef -- Until https://github.com/ember-cli/eslint-plugin-ember/issues/1747 is resolved... */
+ 
 
 import { render, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from '@universal-ember/form';
 import { setupRenderingTest } from 'test-app/tests/helpers';
+
+import { HeadlessForm } from '@universal-ember/form';
 
 import type { InputType } from '@universal-ember/form';
 
@@ -68,6 +69,7 @@ module('Integration Component HeadlessForm > Input', function (hooks) {
   });
 
   ['checkbox', 'radio'].forEach((type) =>
+    // eslint-disable-next-line qunit/require-expect -- setupOnerror callback needs assert count check
     test(`input throws for ${type} type handled by dedicated component`, async function (assert) {
       assert.expect(1);
       setupOnerror((e: Error) => {

@@ -12,7 +12,7 @@ export interface CaptureEventsModifierSignature {
       /*
        * @internal
        */
-      triggerValidation(): void;
+      triggerValidation: (this: void) => void;
     };
   };
 }
@@ -20,10 +20,12 @@ export interface CaptureEventsModifierSignature {
 const CaptureEventsModifier = modifier<CaptureEventsModifierSignature>(
   (element, _pos, { event, triggerValidation }) => {
     if (event) {
-      element.addEventListener(event, triggerValidation, { passive: true });
+      const handler = () => triggerValidation();
+
+      element.addEventListener(event, handler, { passive: true });
 
       return () => {
-        element.removeEventListener(event, triggerValidation);
+        element.removeEventListener(event, handler);
       };
     }
   }

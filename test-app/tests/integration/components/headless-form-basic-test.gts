@@ -1,10 +1,11 @@
-/* eslint-disable no-undef -- Until https://github.com/ember-cli/eslint-plugin-ember/issues/1747 is resolved... */
+ 
 
 import { render, setupOnerror } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from '@universal-ember/form';
 import { setupRenderingTest } from 'test-app/tests/helpers';
+
+import { HeadlessForm } from '@universal-ember/form';
 
 import type { RenderingTestContext } from '@ember/test-helpers';
 
@@ -65,6 +66,7 @@ module('Integration Component HeadlessForm > Basics', function (hooks) {
         .exists('field component contains no markup itself');
     });
 
+    // eslint-disable-next-line qunit/require-expect -- setupOnerror callback needs assert count check
     test('@name must be unique', async function (assert) {
       assert.expect(1);
 

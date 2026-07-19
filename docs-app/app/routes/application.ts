@@ -13,6 +13,6 @@ export default class Application extends Route {
   }
 
   afterModel() {
-    setupHLJS(getOwner(this));
+    void setupHLJS(getOwner(this));
   }
 }

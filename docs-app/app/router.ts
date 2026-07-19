@@ -11,7 +11,7 @@ export default class Router extends EmberRouter {
   constructor(...args: [object]) {
     super(...args);
 
-    let scroll = () => window.scrollTo(0, 0);
+    const scroll = () => window.scrollTo(0, 0);
 
     this.on('routeDidChange', scroll);
     registerDestructor(this, () => {
