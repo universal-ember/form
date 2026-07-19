@@ -64,12 +64,6 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
-      # Populate packages/*/dist BEFORE the install below re-creates the
-      # injected workspace-package copies: injection hardlinks whatever is
-      # on disk at install time, and nothing re-syncs dist afterwards when
-      # later turbo builds are cache replays.
-      - name: Build workspace packages
-        run: pnpm build:packages
       - name: 'Change TS to ${{ matrix.typescript-scenario }}'
         run: 'pnpm add --save-dev ${{ matrix.typescript-scenario}}'
         working-directory: ./test-app
@@ -112,7 +106,9 @@ jobs:
       - uses: ./.github/actions/pnpm
       - name: Install Dependencies (without lockfile)
         run: rm pnpm-lock.yaml && pnpm install
-      - run: pnpm test
+      # the fresh install re-created the injected workspace-package copies;
+      # --force makes the package builds really run so pnpm re-syncs them
+      - run: pnpm test --force
 
   try_scenarios:
     name: ${{ matrix.name }}
