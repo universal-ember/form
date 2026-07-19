@@ -1,7 +1,8 @@
 import { module, test } from 'qunit';
 
-import { validateYup } from '@universal-ember/form-yup';
 import { object, string } from 'yup';
+
+import { validateYup } from '@universal-ember/form-yup';
 
 module('Unit | Helpers | validate-yup', function () {
   const schema = object({
@@ -17,7 +18,7 @@ module('Unit | Helpers | validate-yup', function () {
   const validator = validateYup(schema);
 
   test('it returns undefined if validation passes', async function (assert) {
-    let result = await validator({ firstName: 'Nicole', lastName: 'Chung' }, [
+    const result = await validator({ firstName: 'Nicole', lastName: 'Chung' }, [
       'firstName',
       'lastName',
     ]);
@@ -26,7 +27,7 @@ module('Unit | Helpers | validate-yup', function () {
   });
 
   test('it returns error record if validation fails', async function (assert) {
-    let result = await validator(
+    const result = await validator(
       { firstName: 'Foo', lastName: 'Smith', email: 'bar' },
       ['firstName', 'lastName']
     );

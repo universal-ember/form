@@ -1,8 +1,9 @@
+import { assert } from '@ember/debug';
+
 import { isChangeset } from 'validated-changeset';
 
 import type { ErrorRecord, FormValidateCallback } from '@universal-ember/form';
 import type { EmberChangeset } from 'ember-changeset';
-import { assert } from '@ember/debug';
 
 /**
  * Validation helper for integrating `ember-changeset` based validations into headless forms:
@@ -34,6 +35,7 @@ export default function validateChangeset(): FormValidateCallback<EmberChangeset
       if (!errorRecord[key]) {
         errorRecord[key] = [];
       }
+
       const errors = errorRecord[key];
 
       assert('Expected errorRecord to have array', errors); // TS does not understand errors cannot be undefined at this point
@@ -45,6 +47,7 @@ export default function validateChangeset(): FormValidateCallback<EmberChangeset
       const messages: string[] = Array.isArray(fixedValidations)
         ? fixedValidations
         : [fixedValidations];
+
       errors.push(
         ...messages.map((message) => ({ type: 'changeset', value, message }))
       );

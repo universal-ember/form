@@ -1,6 +1,7 @@
 import { module, test } from 'qunit';
 
 import { Changeset } from 'ember-changeset';
+
 import { validateChangeset } from '@universal-ember/form-changeset';
 
 import type { ValidatorAction } from 'ember-changeset/types';
@@ -31,7 +32,7 @@ module('Unit | Helpers | validate-changeset', function () {
   test('it returns undefined if validation passes', async function (assert) {
     const changeset = Changeset({ firstName: 'Nicole' }, validator);
 
-    let result = await validate(changeset, ['firstName']);
+    const result = await validate(changeset, ['firstName']);
 
     assert.strictEqual(result, undefined);
   });
@@ -42,7 +43,7 @@ module('Unit | Helpers | validate-changeset', function () {
       validator
     );
 
-    let result = await validate(changeset, ['firstName', 'lastName', 'email']);
+    const result = await validate(changeset, ['firstName', 'lastName', 'email']);
 
     assert.deepEqual(result, {
       firstName: [

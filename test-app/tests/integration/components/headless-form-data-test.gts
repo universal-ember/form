@@ -1,4 +1,4 @@
-/* eslint-disable no-undef -- Until https://github.com/ember-cli/eslint-plugin-ember/issues/1747 is resolved... */
+ 
 
 import { tracked } from '@glimmer/tracking';
 import { fn } from '@ember/helper';
@@ -14,11 +14,10 @@ import {
 import { module, test } from 'qunit';
 import { getOwnConfig, macroCondition } from '@embroider/macros';
 
-import { HeadlessForm } from '@universal-ember/form';
 import sinon from 'sinon';
 import { setupRenderingTest } from 'test-app/tests/helpers';
 
-import type Store from '@ember-data/store';
+import { HeadlessForm } from '@universal-ember/form';
 
 module('Integration Component HeadlessForm > Data', function (hooks) {
   setupRenderingTest(hooks);
@@ -211,7 +210,7 @@ module('Integration Component HeadlessForm > Data', function (hooks) {
 
       if (macroCondition(getOwnConfig<{ supportsEmberData: boolean }>().supportsEmberData)) {
         test('ember-data object', async function (assert) {
-          const store = this.owner.lookup('service:store') as Store;
+          const store = this.owner.lookup('service:store');
 
           const data = store.createRecord('user', {
             firstName: 'Tony',
@@ -718,7 +717,7 @@ module('Integration Component HeadlessForm > Data', function (hooks) {
 
       if (macroCondition(getOwnConfig<{ supportsEmberData: boolean }>().supportsEmberData)) {
         test('ember-data object', async function (assert) {
-          const store = this.owner.lookup('service:store') as Store;
+          const store = this.owner.lookup('service:store');
 
           const data = store.createRecord('user', {
             firstName: 'Tony',

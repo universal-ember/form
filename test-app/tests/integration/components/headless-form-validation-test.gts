@@ -1,12 +1,13 @@
-/* eslint-disable no-undef -- Until https://github.com/ember-cli/eslint-plugin-ember/issues/1747 is resolved... */
+ 
 
 import { tracked } from '@glimmer/tracking';
 import { blur, click, fillIn, render, rerender } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 
-import { HeadlessForm } from '@universal-ember/form';
 import sinon from 'sinon';
 import { setupRenderingTest } from 'test-app/tests/helpers';
+
+import { HeadlessForm } from '@universal-ember/form';
 
 import { input } from '../../helpers/dom';
 

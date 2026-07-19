@@ -4,7 +4,7 @@ const getChannelURL = require('ember-source-channel-url');
 const { embroiderSafe, embroiderOptimized } = require('@embroider/test-setup');
 
 module.exports = async function () {
-  let releaseVersion = await getChannelURL('release');
+  const releaseVersion = await getChannelURL('release');
 
   return {
     usePnpm: true,

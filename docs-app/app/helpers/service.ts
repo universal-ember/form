@@ -14,8 +14,8 @@ export default class GetService<Key extends keyof Registry> extends Helper<
   Signature<Key>
 > {
   compute([name]: [Key]): Registry[Key] {
-    let owner = getOwner(this);
+    const owner = getOwner(this);
 
-    return owner.lookup(`service:${name}`) as Registry[Key];
+    return owner.lookup(`service:${name}`);
   }
 }
