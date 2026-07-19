@@ -133,39 +133,6 @@ jobs:
         working-directory: ./test-app
         run: node_modules/.bin/ember try:one ${{matrix.try-scenario}} --skip-cleanup --- pnpm turbo test
 
-  # https://github.com/changesets/action
-  release:
-    name: Release
-    timeout-minutes: 5
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    needs:
-      - default_tests
-      - floating_tests
-      - typecheck
-      - try_scenarios
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: ./.github/actions/pnpm
-      - run: pnpm build:packages
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm release
-          title: 'Release Preview'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
   publishDocs:
     name: Publish Docs to Cloudflare Pages
     runs-on: ubuntu-latest
@@ -175,6 +142,8 @@ jobs:
       contents: read
       deployments: write
       pull-requests: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.UX_OSS_CLOUDFLARE_API_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -183,6 +152,9 @@ jobs:
       - run: pnpm build:docs
       - name: Publish to Cloudflare Pages
         id: publishStep
+        # skip (rather than fail) when the Cloudflare secrets are not
+        # configured, e.g. on forks or PRs from forks
+        if: env.CLOUDFLARE_API_TOKEN != ''
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.UX_OSS_CLOUDFLARE_API_TOKEN }}
@@ -191,6 +163,7 @@ jobs:
           directory: ./docs-app/dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       - uses: marocchino/sticky-pull-request-comment@v2
+        if: env.CLOUDFLARE_API_TOKEN != '' && github.event_name == 'pull_request'
         with:
           message: |+
             ## Preview URLs
