@@ -53,5 +53,5 @@ peerDependencyRules:
     typescript: '6'
 
 allowBuilds:
-  core-js: set this to true or false
-  unrs-resolver: set this to true or false
+  core-js: false
+  unrs-resolver: true
