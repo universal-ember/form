@@ -55,6 +55,7 @@ jobs:
       fail-fast: true
       matrix:
         typescript-scenario:
+          - typescript@5.9
           - typescript@6.0
 
     steps:
