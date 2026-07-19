@@ -1,15 +1,24 @@
 import { setApplication } from '@ember/test-helpers';
 import * as QUnit from 'qunit';
 import { setup } from 'qunit-dom';
-import { start } from 'ember-qunit';
+import { setupEmberOnerrorValidation, start as qunitStart } from 'ember-qunit';
 
-import setupSinon from 'ember-sinon-qunit';
+import sinon from 'sinon';
 import Application from 'test-app/app';
-import config from 'test-app/config/environment';
+import config from 'test-app/config';
 
-setApplication(Application.create(config.APP));
+export function start() {
+  config.locationType = 'none';
+  config.APP.rootElement = '#ember-testing';
+  config.APP.autoboot = false;
 
-setup(QUnit.assert);
-setupSinon();
+  setApplication(Application.create(config.APP));
 
-start();
+  setup(QUnit.assert);
+  setupEmberOnerrorValidation();
+
+  // previously provided by ember-sinon-qunit
+  QUnit.testDone(() => sinon.restore());
+
+  qunitStart();
+}

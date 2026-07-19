@@ -49,6 +49,9 @@ peerDependencyRules:
   ignoreMissing:
     - ember-cli-htmlbars
     - '@babel/core'
+    # On ember-source >= 6, @glimmer/tracking is provided (virtually) by
+    # ember-source itself; installing the real (stale) package shadows it.
+    - '@glimmer/tracking'
     # Old glint envs are still declared as peers by some transitive deps
     # (e.g. @crowdstrike/ember-oss-docs); the new glint setup no longer
     # ships them, so ignore.
