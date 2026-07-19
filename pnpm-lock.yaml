@@ -211,8 +211,8 @@ importers:
         specifier: ~5.12.0
         version: 5.12.0(627b12eebd4b8157321ad813eae7fb14)
       ember-template-imports:
-        specifier: ^3.1.2
-        version: 3.4.2(supports-color@8.1.1)
+        specifier: ^4.4.0
+        version: 4.4.0(supports-color@8.1.1)
       ember-template-lint:
         specifier: ^4.14.0
         version: 4.18.2(supports-color@8.1.1)
@@ -413,6 +413,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.9.5
+      prettier-plugin-ember-template-tag:
+        specifier: ^2.1.7
+        version: 2.1.7(prettier@3.9.5)(supports-color@8.1.1)
       rollup:
         specifier: ^4.0.0
         version: 4.62.2
@@ -523,6 +526,12 @@ importers:
       '@universal-ember/form-yup':
         injected: true
     devDependencies:
+      '@ember-data/model':
+        specifier: ^5.8.2
+        version: 5.8.2(441692fd1e7dbc4a7b3cba7430ac7990)
+      '@ember-data/store':
+        specifier: ^5.8.2
+        version: 5.8.2(5f2fde677cb60ab7cf61ce31646930bf)
       '@ember/app-tsconfig':
         specifier: ^1.0.0
         version: 1.0.3
@@ -659,8 +668,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(encoding@0.1.13)
       ember-template-imports:
-        specifier: ^3.4.0
-        version: 3.4.2(supports-color@8.1.1)
+        specifier: ^4.4.0
+        version: 4.4.0(supports-color@8.1.1)
       ember-template-lint:
         specifier: ^5.2.0
         version: 5.13.0(supports-color@8.1.1)
@@ -4539,6 +4548,10 @@ packages:
   ember-template-imports@3.4.2:
     resolution: {integrity: sha512-OS8TUVG2kQYYwP3netunLVfeijPoOKIs1SvPQRTNOQX4Pu8xGGBEZmrv0U1YTnQn12Eg+p6w/0UdGbUnITjyzw==}
     engines: {node: 12.* || >= 14}
+
+  ember-template-imports@4.4.0:
+    resolution: {integrity: sha512-HNOHabTEMbRluci1uScvh3ljMDo9E46dHHNcJAIf5yjOhIQ/zN4Y0DVDWrRfcbihlHvt4v/iF69G+8tffC1YkA==}
+    engines: {node: 16.* || >= 18}
 
   ember-template-lint@4.18.2:
     resolution: {integrity: sha512-yI8kQ8IQ2x5HVq0tQAISXABOHr0Is5sAg6rwceO6M8CYozq7HMxUPEj0VbdcbyIE70SWw/8d24M1rBI4km544Q==}
@@ -14510,6 +14523,14 @@ snapshots:
       parse-static-imports: 1.1.0
       string.prototype.matchall: 4.0.12
       validate-peer-dependencies: 1.2.0
+    transitivePeerDependencies:
+      - supports-color
+
+  ember-template-imports@4.4.0(supports-color@8.1.1):
+    dependencies:
+      broccoli-stew: 3.0.0(supports-color@8.1.1)
+      content-tag: 4.2.0
+      ember-cli-version-checker: 5.1.2(supports-color@8.1.1)
     transitivePeerDependencies:
       - supports-color
 
