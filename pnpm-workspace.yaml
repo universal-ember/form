@@ -3,3 +3,9 @@ packages:
   - 'internal/*'
   - 'test-app'
   - 'docs-app'
+
+# Force browserslist-generator v3+ so that rollup-plugin-ts loads under Node 24.
+# v2.x uses the removed `assert { type: 'json' }` import assertion syntax;
+# v3.x uses the standard `with { type: 'json' }` import attribute syntax.
+overrides:
+  browserslist-generator: ^3.0.0
