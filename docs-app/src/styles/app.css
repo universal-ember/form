@@ -1,6 +1,126 @@
 @import './docs-support.css';
 
 /*
+ * CSS Reset (modern minimal)
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+ol,
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Custom properties
+ */
+:root {
+  --font-sans:
+    'InterVariable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-display: 'Helvetica', 'Arial', sans-serif;
+  --max-width-8xl: 88rem;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/*
+ * Theme variables
+ */
+.theme-light {
+  --color-page-background: white;
+  --color-foreground: black;
+}
+
+.theme-dark {
+  --color-page-background: #252525;
+  --color-foreground: white;
+}
+
+/*
+ * Prose overrides
+ */
+.prose
+  :where(code):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  )::before {
+  content: '' !important;
+}
+
+.prose
+  :where(code):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  )::after {
+  content: '' !important;
+}
+
+.prose .demo details {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.prose .featured-demo input {
+  color: black;
+}
+
+/*
+ * TypeDoc overrides
+ */
+.typedoc__declaration-children {
+  max-width: 800px;
+}
+
+.typedoc__component-signature__block
+  > .typedoc__property
+  > .typedoc__declaration
+  .typedoc__declaration-children {
+  display: block;
+}
+
+/*
  * Small utility set used by the doc pages' demos
  * (kept intentionally tiny -- this app does not use tailwind)
  */
