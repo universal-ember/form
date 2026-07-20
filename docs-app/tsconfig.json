@@ -7,7 +7,11 @@
       "kolay/virtual",
       "@embroider/core/virtual",
       "@glint/ember-tsc/types"
-    ]
+    ],
+    "paths": {
+      "docs-app/tests/*": ["./tests/*"],
+      "docs-app/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests/**/*"]
 }

@@ -25,7 +25,7 @@
     "start": "pnpm --filter './packages/*' build; concurrently 'npm:_start:*' --names '_start:'",
     "start:docs-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter docs-app... start",
     "start:test-app": "pnpm --filter './packages/*' build; pnpm --stream --parallel --filter test-app... start",
-    "test": "pnpm turbo --filter test-app test"
+    "test": "pnpm turbo test"
   },
   "devDependencies": {
     "concurrently": "^9.0.0",

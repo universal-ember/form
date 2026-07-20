@@ -141,7 +141,9 @@ jobs:
         # but skips the actual `pnpm run build`, so pnpm's
         # syncInjectedDepsAfterScripts hook never refreshes the injected
         # copies created by the scenario install
-        run: pnpm turbo test --force
+        # scenarios only vary test-app's dependencies; docs-app tests run
+        # in the Default Tests job
+        run: pnpm turbo test --filter test-app --force
         env: ${{ matrix.env }}
 
   build_docs:
