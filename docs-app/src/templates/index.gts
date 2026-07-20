@@ -29,7 +29,10 @@ import {
       </p>
     </:tagline>
     <:callToAction>
-      <InternalLink href="/1-get-started/index.md" class="landing-cta">
+      <InternalLink
+        href="/1-get-started/index.md"
+        style="color: white; text-shadow: 0px 2px 0px black; transform: scale(2.5);"
+      >
         Get Started ➤
       </InternalLink>
     </:callToAction>
@@ -123,30 +126,6 @@ import {
         .landing-tagline {
           max-width: 46ch;
           margin: 0;
-        }
-
-        a.landing-cta,
-        a.landing-cta:visited {
-          display: inline-block;
-          font-family: var(--font-display);
-          font-style: normal;
-          font-size: 1.5rem;
-          font-weight: 700;
-          text-decoration: none;
-          color: #1e1b4b !important;
-          background: white;
-          padding: 0.5rem 1.75rem;
-          border-radius: 999px;
-          box-shadow: 0 6px 20px rgb(0 0 0 / 30%);
-          transition:
-            transform 0.15s ease,
-            box-shadow 0.15s ease;
-        }
-
-        .landing-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 10px 28px rgb(0 0 0 / 35%);
-          text-decoration: none;
         }
 
         .landing-blurb {
