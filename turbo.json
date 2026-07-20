@@ -14,7 +14,7 @@
       // test execution, so we can only get away with only
       // building our dependencies
       "dependsOn": ["^build"],
-      "env": ["EMBER_TRY_CURRENT_SCENARIO", "EMBROIDER_TEST_SETUP_OPTIONS"]
+      "env": ["ENABLE_COMPAT_BUILD"]
     },
     "build": {
       "outputs": ["dist/**"],

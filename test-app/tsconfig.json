@@ -1,23 +1,26 @@
 {
   "extends": "@ember/app-tsconfig",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
+    "allowJs": true,
+    "lib": ["esnext", "dom", "dom.iterable"],
     "types": [
       "ember-source/types",
+      "@embroider/core/virtual",
+      "vite/client",
       "@glint/ember-tsc/types",
       "ember-data/unstable-preview-types",
       "@ember-data/model/unstable-preview-types",
       "@ember-data/store/unstable-preview-types"
     ],
-    // The combination of `baseUrl` with `paths` allows Ember's classic package
-    // layout, which is not resolvable with the Node resolution algorithm, to
-    // work with TypeScript.
-    "baseUrl": ".",
     "paths": {
-      "test-app/tests/*": ["tests/*"],
-      "test-app/*": ["app/*"],
-      "*": ["types/*"]
+      "test-app/tests/*": ["./tests/*"],
+      "test-app/*": ["./app/*"],
+      // The workspace still contains @glimmer/component v1 (docs-app), so
+      // pnpm's fallback lookup can hand glint's `declare module` augmentation
+      // a different copy than the app uses. Pin one identity for this project.
+      "@glimmer/component": ["./node_modules/@glimmer/component"],
+      "@glimmer/component/*": ["./node_modules/@glimmer/component/*"]
     }
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"]
+  "include": ["app/**/*", "tests/**/*"]
 }

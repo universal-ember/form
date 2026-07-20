@@ -1,0 +1,13 @@
+import { LinkTo } from '@ember/routing';
+
+<template>
+  <div class="max-w-md mx-auto">
+    <nav class="flex gap-4">
+      <LinkTo @route="index">Default</LinkTo>
+      <LinkTo @route="yup-async-form">Yup Async Form</LinkTo>
+    </nav>
+    <h2 class="text-2xl my-8" id="title">Welcome to Headless Forms!</h2>
+
+    {{outlet}}
+  </div>
+</template>

@@ -1,0 +1,147 @@
+import { HeadlessForm } from '@universal-ember/form';
+
+import type { TOC } from '@ember/component/template-only';
+import type IndexController from 'test-app/controllers/index';
+
+const IndexRoute: TOC<{
+  Args: { controller: IndexController; model: unknown };
+}> = <template>
+  <HeadlessForm
+    @data={{@controller.data}}
+    @validateOn="focusout"
+    @revalidateOn="input"
+    @onSubmit={{@controller.doSomething}}
+    as |form|
+  >
+    <form.Field @name="firstName" as |field|>
+      <div class="my-2 flex flex-col">
+        <field.Label class={{if field.isInvalid "text-red-500"}}>First name</field.Label>
+        <field.Input
+          class="border rounded px-2 {{if field.isInvalid 'border-red-500'}}"
+          required
+        />
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+    {{#if form.data.firstName}}
+      You entered:
+      {{form.data.firstName}}
+    {{/if}}
+    <form.Field @name="lastName" as |field|>
+      <div class="my-2 flex flex-col">
+        <field.Label class={{if field.isInvalid "text-red-500"}}>Last name</field.Label>
+        <field.Input
+          class="border rounded px-2 {{if field.isInvalid 'border-red-500'}}"
+          required
+        />
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+
+    <form.Field @name="gender" as |field|>
+      <field.RadioGroup class="my-2 flex flex-col" as |group|>
+        <group.Label>Gender</group.Label>
+
+        <div class="flex flex-row space-x-2">
+          <group.Radio @value="male" as |radio|>
+            <radio.Input required />
+            <radio.Label>Male</radio.Label>
+          </group.Radio>
+          <group.Radio @value="female" as |radio|>
+            <radio.Input required />
+            <radio.Label>Female</radio.Label>
+          </group.Radio>
+          <group.Radio @value="other" as |radio|>
+            <radio.Input required />
+            <radio.Label>Other</radio.Label>
+          </group.Radio>
+        </div>
+      </field.RadioGroup>
+      <field.Errors class="text-red-600" />
+    </form.Field>
+
+    <form.Field @name="likes" as |field|>
+      <field.CheckboxGroup class="my-2 flex flex-col" as |group|>
+        <group.Label>Likes</group.Label>
+
+        <div class="flex flex-row space-x-2">
+          <group.Checkbox @value="red" as |radio|>
+            <radio.Input />
+            <radio.Label>Red</radio.Label>
+          </group.Checkbox>
+          <group.Checkbox @value="green" as |radio|>
+            <radio.Input />
+            <radio.Label>Green</radio.Label>
+          </group.Checkbox>
+          <group.Checkbox @value="blue" as |radio|>
+            <radio.Input />
+            <radio.Label>Blue</radio.Label>
+          </group.Checkbox>
+        </div>
+      </field.CheckboxGroup>
+      <field.Errors class="text-red-600" />
+    </form.Field>
+
+    <form.Field @name="email" as |field|>
+      <div class="my-2 flex flex-col">
+        <field.Label
+          class={{if field.isInvalid "text-red-500"}}
+        >Email</field.Label>
+        <field.Input
+          class="border rounded px-2 {{if field.isInvalid 'border-red-500'}}"
+          @type="email"
+          required
+        />
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+
+    <form.Field @name="country" as |field|>
+      <div class="my-2 flex flex-col">
+        <field.Label
+          class={{if field.isInvalid "text-red-500"}}
+        >Country</field.Label>
+        <field.Select
+          class="border rounded px-2 {{if field.isInvalid 'border-red-500'}}"
+          required
+          as |select|
+        >
+          <select.Option @value="">Please select...</select.Option>
+          <select.Option @value="USA">United States</select.Option>
+          <select.Option @value="CA">Canada</select.Option>
+          <select.Option @value="GER">Germany</select.Option>
+        </field.Select>
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+
+    <form.Field @name="comment" as |field|>
+      <div class="my-2 flex flex-col">
+        <field.Label>Comment</field.Label>
+        <field.Textarea class="border rounded px-2" />
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+
+    <form.Field @name="accept_tos" as |field|>
+      <div class="my-2 flex flex-row space-x-2">
+        <field.Checkbox required />
+        <field.Label class={{if field.isInvalid "text-red-500"}}>Accept TOS</field.Label>
+        <field.Errors class="text-red-600" />
+      </div>
+    </form.Field>
+
+    <button
+      type="submit"
+      class="bg-slate-600 text-white rounded px-8 py-1"
+      data-test-submit
+    >Submit</button>
+    <button
+      type="reset"
+      class="bg-slate-400 text-white rounded px-8 py-1"
+      data-test-reset
+    >Reset</button>
+  </HeadlessForm>
+</template>;
+
+export default IndexRoute;

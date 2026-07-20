@@ -13,3 +13,11 @@ runs:
       run: |
         pnpm -v
         pnpm install
+    # Injected workspace-package copies are created by the install above,
+    # before any dist exists (fresh checkout). Only a *real* build (via
+    # `pnpm run`) triggers pnpm's syncInjectedDepsAfterScripts hook — a
+    # turbo cache replay restores dist into packages/* but leaves the
+    # injected copies empty. So force the builds to actually execute.
+    - name: 'Build workspace packages (sync injected deps)'
+      shell: 'bash'
+      run: pnpm build:packages --force

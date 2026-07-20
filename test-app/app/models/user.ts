@@ -10,9 +10,3 @@ export default class UserModel extends Model {
   @attr('string') acceptTerms?: boolean;
   @attr('string') age?: number;
 }
-
-declare module 'ember-data/types/registries/model' {
-  export default interface ModelRegistry {
-    user: UserModel;
-  }
-}
