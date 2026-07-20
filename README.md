@@ -1,9 +1,8 @@
-# @universal-ember/form 
+# @universal-ember/form
 
 [![CI](https://github.com/universal-ember/form/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/universal-ember/form/actions/workflows/ci.yml)
 
-
-The Ember.js addon that distills the common behavior and accessibility best practices of forms into reusable components, without any opinions on specific markup or styling. Use it to build your forms directly, or to build your opinionated forms component kit on top of it.
+The Ember.js library that distills the common behavior and accessibility best practices of forms into reusable components, without any opinions on specific markup or styling. Use it to build your forms directly, or to build your opinionated forms component kit on top of it.
 
 ## Key Features
 
@@ -13,23 +12,22 @@ The Ember.js addon that distills the common behavior and accessibility best prac
 - Optional ready-to-use integrations for `ember-changeset` and `yup` based validation
 - Support for async state
 - TypeScript / Glint support with tight types
-- Octane-based v2 addon
 - Fully tested
 
 ## Compatibility
 
-- Ember.js v4.4 or above
-- Embroider or ember-auto-import v2
+- Ember.js v4.4 or above (CI-verified on v5.8+)
+- a modern (vite) app, or a classic build via ember-auto-import v2 / Embroider
 
 ## Installation
 
 ```
-ember install ember-headless-form
+pnpm add @universal-ember/form
 ```
 
 ## Usage
 
-Visit our [documentation website](https://ember-headless-form.pages.dev/).
+Visit our [documentation website](https://ue-form.pages.dev/).
 
 ## Contributing
 

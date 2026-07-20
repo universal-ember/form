@@ -5,7 +5,11 @@
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/CrowdStrike/@universal-ember/form.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/universal-ember/form.git",
+    "directory": "packages/changeset"
+  },
   "license": "MIT",
   "author": "CrowdStrike UX Team",
   "files": [
