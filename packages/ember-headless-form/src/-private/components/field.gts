@@ -25,6 +25,7 @@ import type {
   UserData,
   ValidationError,
 } from '../types';
+import type Owner from '@ember/owner';
 import type { ModifierLike, WithBoundArgs } from '@glint/template';
 
 export interface HeadlessFormFieldComponentSignature<
@@ -232,7 +233,7 @@ export default class HeadlessFormFieldComponent<
   CaptureEventsModifier = CaptureEventsModifier;
 
   constructor(
-    owner: unknown,
+    owner: Owner,
     args: HeadlessFormFieldComponentSignature<DATA, KEY>['Args'],
   ) {
     super(owner, args);
