@@ -4,3 +4,6 @@ node_modules/
 .env*
 !.env.example
 tmp/
+
+# a11y middleware reporter output (test artifact)
+ember-a11y-report/
