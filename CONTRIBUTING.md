@@ -2,50 +2,42 @@
 
 ## Installation
 
-* `git clone <repository-url>`
-* `cd ember-headless-form`
-* `pnpm install`
+- `git clone git@github.com:universal-ember/form.git`
+- `cd form`
+- `pnpm install`
 
 ## Linting
 
-* `pnpm lint`
-* `pnpm lint:fix`
+- `pnpm lint`
+- `pnpm lint:fix`
 
 ## Developing
 
 To develop in this monorepo you can simply run:
 
- * `pnpm start`
+- `pnpm start`
 
 from the root directory.
 
 This will:
 
- * Build all of the `packages/*` and watch them for changes
- * Build the docs app and the tests app and serve them
- * Automatically sync changes from the `packages/*` to the served apps so 
-   that they are always up to date.
+- Build all of the `packages/*` and watch them for changes
+- Serve the docs app and the test app (vite dev servers, ports printed on boot)
 
-You can now visit:
+If you only need one of the apps:
 
- * The docs app at http://localhost:4201/
- * The tests app at http://localhost:4202/tests
-
-If you don't need to run both apps you can save a little of your local 
-compute by running:
-
- * `start:docs-app` and visiting http://localhost:4201/
- * `start:test-app` and visiting http://localhost:4202/tests
-
-These commands will still build and watch the `packages/*` and sync changes
-to the running app. Don't run both `only` tasks together as this will cause
-issues - if you want to run both apps simply use `pnpm start`.
+- `pnpm start:docs-app`
+- `pnpm start:test-app`
 
 ## Running tests
 
-You can run the tests with the following commands:
+- `pnpm test`
 
- * `pnpm test`
- * `pnpm test:docs`
+Scenario testing (other Ember versions) uses [@embroider/try](https://github.com/embroider-build/embroider):
 
-For more information on using ember-cli, visit [https://cli.emberjs.com/release/](https://cli.emberjs.com/release/).
+- `cd test-app`
+- `pnpm dlx @embroider/try apply ember-lts-5.12`
+- `pnpm install --no-lockfile` (from the repo root)
+- `pnpm turbo test --force`
+
+See `test-app/.try.mjs` for the available scenarios.
