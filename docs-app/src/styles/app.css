@@ -1,0 +1,96 @@
+@import './docs-support.css';
+
+/*
+ * Small utility set used by the doc pages' demos
+ * (kept intentionally tiny -- this app does not use tailwind)
+ */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.flex-row {
+  flex-direction: row;
+}
+.flex-1 {
+  flex: 1 1 0%;
+}
+.flex-initial {
+  flex: 0 1 auto;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.gap-8 {
+  gap: 2rem;
+}
+.gap-12 {
+  gap: 3rem;
+}
+.space-x-2 > * + * {
+  margin-left: 0.5rem;
+}
+.border {
+  border: 1px solid #94a3b8;
+}
+.border-2 {
+  border-width: 2px;
+}
+.border-purple-500 {
+  border-color: #a855f7;
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.justify-around {
+  justify-content: space-around;
+}
+
+/* demo container tweaks */
+.featured-demo {
+  button {
+    color: black;
+    background: white;
+    border: 1px solid;
+    padding: 0 0.25rem;
+  }
+
+  &[data-demo-fit] {
+    .glimdown-render {
+      max-height: unset;
+    }
+  }
+
+  &[data-demo-tight] {
+    .glimdown-render {
+      padding: 2rem;
+    }
+  }
+}
+
+.glimdown-render {
+  input,
+  select,
+  textarea {
+    color: black;
+  }
+}

@@ -1,24 +1,13 @@
 {
   "extends": "@ember/app-tsconfig",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0",
-    "types": ["ember-source/types", "@glint/ember-tsc/types"],
-    "noEmitOnError": false,
-
-    // The combination of `baseUrl` with `paths` allows Ember's classic package
-    // layout, which is not resolvable with the Node resolution algorithm, to
-    // work with TypeScript.
-    "baseUrl": ".",
-    "paths": {
-      "docs-app/tests/*": ["tests/*"],
-      "docs-app/*": ["app/*"],
-      // ember-oss-docs' exports map points at extensionless `./dist/*` targets,
-      // which module: bundler resolution refuses to resolve for subpath imports
-      "@crowdstrike/ember-oss-docs/*": [
-        "node_modules/@crowdstrike/ember-oss-docs/dist/*"
-      ],
-      "*": ["types/*"]
-    }
+    "types": [
+      "ember-source/types",
+      "vite/client",
+      "kolay/virtual",
+      "@embroider/core/virtual",
+      "@glint/ember-tsc/types"
+    ]
   },
-  "include": ["app/**/*", "tests/**/*", "types/**/*"]
+  "include": ["src/**/*"]
 }

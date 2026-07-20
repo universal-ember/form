@@ -3,6 +3,8 @@ import { assert } from '@ember/debug';
 import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 
+import type Owner from '@ember/owner';
+
 // Possible values for the input type, see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
 // for the sake of completeness, we list all here, with some commented out that are better handled elsewhere, or not at all...
 export type InputType =
@@ -86,7 +88,7 @@ export interface HeadlessFormControlInputComponentSignature {
 
 export default class HeadlessFormControlInputComponent extends Component<HeadlessFormControlInputComponentSignature> {
   constructor(
-    owner: unknown,
+    owner: Owner,
     args: HeadlessFormControlInputComponentSignature['Args'],
   ) {
     assert(

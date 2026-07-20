@@ -60,6 +60,8 @@ peerDependencyRules:
     # Some transitive deps (e.g. rollup-plugin-ts) do not declare TS 6 support
     # yet, but they work fine.
     typescript: '6'
+    # ember-primitives/ember-repl pin an exact @glint/template; any 1.x works
+    '@glint/template': '1'
 
 allowBuilds:
   core-js: false
