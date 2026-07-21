@@ -185,32 +185,65 @@ body {
   justify-content: space-around;
 }
 
-/* demo container tweaks */
-.featured-demo {
-  button {
-    color: black;
-    background: white;
-    border: 1px solid;
-    padding: 0 0.25rem;
-  }
-
-  &[data-demo-fit] {
-    .glimdown-render {
-      max-height: unset;
-    }
-  }
-
-  &[data-demo-tight] {
-    .glimdown-render {
-      padding: 2rem;
-    }
-  }
+/*
+ * Live demo presentation
+ *
+ * kolay renders every ```gjs live``` fence's output into a
+ * .glimdown-render element; style it as a card so demos are visually
+ * contained in both themes, and keep the demos' native form controls
+ * legible in dark mode.
+ */
+.repl-sdk__demo,
+.glimdown-render {
+  border: 1px solid light-dark(#e2e8f0, #334155);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-block: 1rem;
+  background: light-dark(#f8fafc, #0b1120);
+  color: light-dark(#0f172a, #e2e8f0);
 }
 
+.repl-sdk__demo input,
+.repl-sdk__demo select,
+.repl-sdk__demo textarea,
+.glimdown-render input,
+.glimdown-render select,
+.glimdown-render textarea {
+  background: light-dark(white, #1e293b);
+  color: light-dark(black, #e2e8f0);
+  border-color: light-dark(#94a3b8, #475569);
+}
+
+.repl-sdk__demo button,
+.glimdown-render button {
+  color: light-dark(black, white);
+  background: light-dark(white, #334155);
+  border: 1px solid light-dark(#94a3b8, #475569);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.75rem;
+}
+
+.repl-sdk__demo button:hover,
+.glimdown-render button:hover {
+  background: light-dark(#f1f5f9, #475569);
+}
+
+.repl-sdk__demo a,
+.glimdown-render a {
+  color: light-dark(#4f46e5, #93c5fd);
+}
+
+.featured-demo[data-demo-fit] .repl-sdk__demo,
 .glimdown-render {
-  input,
-  select,
-  textarea {
-    color: black;
-  }
+  max-height: unset;
+}
+
+.featured-demo[data-demo-tight] .repl-sdk__demo,
+.glimdown-render {
+  padding: 2rem;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid light-dark(#e2e8f0, #334155);
 }
