@@ -90,7 +90,7 @@ jobs:
     timeout-minutes: 15
     needs: [determinePR]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           repository: ${{ needs.determinePR.outputs.repo }}
           ref: ${{ needs.determinePR.outputs.branch }}
