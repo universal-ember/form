@@ -22,7 +22,7 @@ jobs:
     name: Install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -35,7 +35,7 @@ jobs:
     needs:
       - install_dependencies
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -58,7 +58,7 @@ jobs:
           - typescript@6.0
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -79,7 +79,7 @@ jobs:
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -98,7 +98,7 @@ jobs:
     needs:
       - install_dependencies
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -121,7 +121,7 @@ jobs:
       matrix: ${{ fromJson(needs.default_tests.outputs.matrix) }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: TurboRepo local server
         uses: felixmosh/turborepo-gh-artifacts@v3
         with:
@@ -153,7 +153,7 @@ jobs:
     needs:
       - install_dependencies
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: TurboRepo local server
