@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
@@ -37,7 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
@@ -60,7 +60,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
@@ -81,7 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
@@ -123,7 +123,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: pnpm/action-setup@v4.4.0
@@ -157,7 +157,7 @@ jobs:
         with:
           persist-credentials: false
       - name: TurboRepo local server
-        uses: felixmosh/turborepo-gh-artifacts@v3
+        uses: felixmosh/turborepo-gh-artifacts@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: ./.github/actions/pnpm
