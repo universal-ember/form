@@ -1,6 +1,6 @@
 {
   "name": "@universal-ember/form-changeset",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Integrates ember-changeset with @universal-ember/form",
   "keywords": [
     "ember-addon"
