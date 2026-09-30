@@ -1,6 +1,6 @@
 {
   "name": "@universal-ember/form-yup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Integrates yup-based validations with @universal-ember/form",
   "keywords": [
     "ember-addon"

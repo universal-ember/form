@@ -1,6 +1,6 @@
 {
   "name": "@universal-ember/form",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "The Ember.js library that distills the common behavior and accessibility best practices of forms into reusable components, without any opinions on specific markup or styling",
   "keywords": [
     "ember-addon"
