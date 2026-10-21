@@ -35,6 +35,7 @@ jobs:
           cache: pnpm
       - run: npm install -g npm@latest # ensure that the globally installed npm is new enough to support OIDC
       - run: pnpm install --frozen-lockfile
+      - run: pnpm build:packages
       - name: Publish to NPM
         run: NPM_CONFIG_PROVENANCE=true pnpm release-plan publish
         env:
