@@ -1,22 +1,12 @@
 {
   "solution": {
     "@universal-ember/form-changeset": {
-      "impact": "patch",
-      "oldVersion": "1.1.0",
-      "newVersion": "1.1.1",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        }
-      ],
-      "pkgJSONPath": "./packages/changeset/package.json"
+      "oldVersion": "1.1.1"
     },
     "@universal-ember/form": {
       "impact": "patch",
-      "oldVersion": "1.2.0",
-      "newVersion": "1.2.1",
+      "oldVersion": "1.2.1",
+      "newVersion": "1.2.2",
       "tagName": "latest",
       "constraints": [
         {
@@ -27,18 +17,8 @@
       "pkgJSONPath": "./packages/form/package.json"
     },
     "@universal-ember/form-yup": {
-      "impact": "patch",
-      "oldVersion": "1.1.0",
-      "newVersion": "1.1.1",
-      "tagName": "latest",
-      "constraints": [
-        {
-          "impact": "patch",
-          "reason": "Appears in changelog section :bug: Bug Fix"
-        }
-      ],
-      "pkgJSONPath": "./packages/yup/package.json"
+      "oldVersion": "1.1.1"
     }
   },
-  "description": "## Release (2026-10-21)\n\n* @universal-ember/form-changeset 1.1.1 (patch)\n* @universal-ember/form 1.2.1 (patch)\n* @universal-ember/form-yup 1.1.1 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/form-changeset`, `@universal-ember/form`, `@universal-ember/form-yup`\n  * [#33](https://github.com/universal-ember/form/pull/33) Build packages before publish (published tarballs have no dist) ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
+  "description": "## Release (2026-10-21)\n\n* @universal-ember/form 1.2.2 (patch)\n\n#### :bug: Bug Fix\n* `@universal-ember/form`\n  * [#35](https://github.com/universal-ember/form/pull/35) Remove unused @embroider/util dependency ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n\n#### Committers: 1\n- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))\n"
 }

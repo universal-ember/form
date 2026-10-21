@@ -2,6 +2,17 @@
 
 ## Release (2026-10-21)
 
+* @universal-ember/form 1.2.2 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/form`
+  * [#35](https://github.com/universal-ember/form/pull/35) Remove unused @embroider/util dependency ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+## Release (2026-10-21)
+
 * @universal-ember/form-changeset 1.1.1 (patch)
 * @universal-ember/form 1.2.1 (patch)
 * @universal-ember/form-yup 1.1.1 (patch)
