@@ -1,5 +1,18 @@
 # Changelog
 
+## Release (2026-10-21)
+
+* @universal-ember/form-changeset 1.1.1 (patch)
+* @universal-ember/form 1.2.1 (patch)
+* @universal-ember/form-yup 1.1.1 (patch)
+
+#### :bug: Bug Fix
+* `@universal-ember/form-changeset`, `@universal-ember/form`, `@universal-ember/form-yup`
+  * [#33](https://github.com/universal-ember/form/pull/33) Build packages before publish (published tarballs have no dist) ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
+#### Committers: 1
+- @NullVoxPopuli's reduced-access machine account for AI usage ([@NullVoxPopuli-ai-agent](https://github.com/NullVoxPopuli-ai-agent))
+
 ## Release (2026-09-30)
 
 * @universal-ember/form-changeset 1.1.0 (minor)
