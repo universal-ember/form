@@ -106,7 +106,7 @@ jobs:
       # workspace-package copies created by the install above
       - run: pnpm build:packages --force
       - run: pnpm build:docs
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: deploy-prep-dist
           if-no-files-found: error
@@ -131,7 +131,7 @@ jobs:
     outputs:
       docsUrl: ${{ steps.deploy.outputs.deployment-url }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: deploy-prep-dist
           path: deploy-prep-dist
