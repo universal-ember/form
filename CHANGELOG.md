@@ -1,5 +1,10 @@
 # Changelog
 
+
+
+
+
+
 ## Release (2026-10-21)
 
 * @universal-ember/form 1.2.2 (patch)
